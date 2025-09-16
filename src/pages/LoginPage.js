@@ -1,3 +1,6 @@
+import { useTranslation } from 'react-i18next';
+
 export default function LoginPage() {
-    return <div className="bg-red-500">Login Page</div>;
+    const { t } = useTranslation();
+    return <div className="bg-red-500">{t('login')}</div>;
 }
