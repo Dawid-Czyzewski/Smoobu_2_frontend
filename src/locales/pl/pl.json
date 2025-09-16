@@ -1,4 +1,9 @@
 {
-  "welcome": "Witamy!",
-  "login": "Zaloguj się"
+  "signInMessage": "Zaloguj się, aby sprawdzić swoje apartamenty",
+  "emailLabel": "Adres e-mail",
+  "emailPlaceholder": "Wpisz swój adres e-mail",
+  "passwordLabel": "Hasło",
+  "passwordPlaceholder": "Wpisz swoje hasło",
+  "loginButton": "Zaloguj się",
+  "forgotPassword": "Zapomniałeś hasła?"
 }
