@@ -4,10 +4,10 @@ export default function LoginPage() {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center" style={{ backgroundColor: '#343A40' }}>
-      <h1 className="text-5xl font-bold text-white mb-8">YourSpain</h1>
-      <form className="w-full max-w-md bg-white rounded-xl shadow-lg p-8 flex flex-col gap-6">
-        <p className="text-lg text-center text-black mb-4">{t('signInMessage')}</p>
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-0" style={{ backgroundColor: '#343A40' }}>
+      <h1 className="text-3xl sm:text-5xl font-bold text-white mb-8 text-center">YourSpain</h1>
+      <form className="w-full max-w-md bg-white rounded-xl shadow-lg p-6 sm:p-8 flex flex-col gap-4 sm:gap-6">
+        <p className="text-base sm:text-lg text-center text-black mb-4">{t('signInMessage')}</p>
 
         <div className="flex flex-col gap-2">
           <label htmlFor="email" className="text-sm font-medium text-black">{t('emailLabel')}</label>
@@ -20,6 +20,7 @@ export default function LoginPage() {
             required
           />
         </div>
+
         <div className="flex flex-col gap-2">
           <label htmlFor="password" className="text-sm font-medium text-black">{t('passwordLabel')}</label>
           <input
@@ -38,6 +39,7 @@ export default function LoginPage() {
         >
           {t('loginButton')}
         </button>
+
         <div className="text-center">
           <a
             href="#"
