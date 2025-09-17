@@ -5,5 +5,7 @@
   "passwordLabel": "Hasło",
   "passwordPlaceholder": "Wpisz swoje hasło",
   "loginButton": "Zaloguj się",
-  "forgotPassword": "Zapomniałeś hasła?"
+  "forgotPassword": "Zapomniałeś hasła?",
+  "pageNotFoundMessage": "Strona nie znaleziona",
+  "goBackHome": "Idź do strony głównej"
 }

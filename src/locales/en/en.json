@@ -5,5 +5,7 @@
   "passwordLabel": "Password",
   "passwordPlaceholder": "Enter your password",
   "loginButton": "Sign In",
-  "forgotPassword": "Forgot your password?"
+  "forgotPassword": "Forgot your password?",
+  "pageNotFoundMessage": "Page Not Found",
+  "goBackHome": "Go Back Home"
 }
