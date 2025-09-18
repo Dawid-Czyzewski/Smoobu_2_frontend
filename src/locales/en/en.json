@@ -1,11 +1,14 @@
 {
   "SignInMessage": "Sign in to check your Apartments",
-  "emailLabel": "Email Address",
-  "emailPlaceholder": "Enter your email address",
+  "usernameLabel": "Username",
+  "usernamePlaceholder": "Enter your username",
   "passwordLabel": "Password",
   "passwordPlaceholder": "Enter your password",
   "loginButton": "Sign In",
   "forgotPassword": "Forgot your password?",
   "pageNotFoundMessage": "Page Not Found",
-  "goBackHome": "Go Back Home"
+  "goBackHome": "Go Back Home",
+  "usernameRequired": "Username is required",
+  "passwordRequired": "Password is required",
+  "loggingIn": "Logging in..."
 }

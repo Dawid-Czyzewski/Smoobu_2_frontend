@@ -1,11 +1,14 @@
 {
   "signInMessage": "Zaloguj się, aby sprawdzić swoje apartamenty",
-  "emailLabel": "Adres e-mail",
-  "emailPlaceholder": "Wpisz swój adres e-mail",
+  "usernameLabel": "Username",
+  "usernamePlaceholder": "Wpisz swój username",
   "passwordLabel": "Hasło",
   "passwordPlaceholder": "Wpisz swoje hasło",
   "loginButton": "Zaloguj się",
   "forgotPassword": "Zapomniałeś hasła?",
   "pageNotFoundMessage": "Strona nie znaleziona",
-  "goBackHome": "Idź do strony głównej"
+  "goBackHome": "Idź do strony głównej",
+  "usernameRequired": "Username jest wymagany",
+  "passwordRequired": "Hasło jest wymagane",
+  "loggingIn": "Logowanie..."
 }
