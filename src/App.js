@@ -9,7 +9,7 @@ import AuthGuard from "./components/AuthGuard";
 function App() {
   function AppRoutes() {
     const location = useLocation();
-    const validPaths = ["/", "/login"];
+    const validPaths = ["/", "/login", "/contact"];
     const hideLayout = location.pathname === "/login" || !validPaths.includes(location.pathname);
 
     return (
@@ -35,6 +35,18 @@ function App() {
                     <div className="p-4">
                       <h1 className="text-xl font-bold">Dashboard</h1>
                       <p>Witamy w panelu!</p>
+                    </div>
+                  </AuthGuard>
+                }
+              />
+
+              <Route
+                path="/contact"
+                element={
+                  <AuthGuard type="private">
+                    <div className="p-4">
+                      <h1 className="text-xl font-bold">Kontakt</h1>
+                      <p>Napisz do nas: support@example.com</p>
                     </div>
                   </AuthGuard>
                 }

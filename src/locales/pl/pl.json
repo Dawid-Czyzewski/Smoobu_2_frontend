@@ -10,5 +10,20 @@
   "goBackHome": "Idź do strony głównej",
   "usernameRequired": "Username jest wymagany",
   "passwordRequired": "Hasło jest wymagane",
-  "loggingIn": "Logowanie..."
+  "loggingIn": "Logowanie...",
+  "header": {
+    "brand": "Extranet",
+    "home": "Strona główna",
+    "contact": "Kontakt",
+    "logout": "Wyloguj"
+  }
+  ,
+  "footer": {
+    "tagline": "Panel dla właścicieli i zarządców",
+    "privacy": "Prywatność",
+    "terms": "Regulamin",
+    "copyright": "YourSpain",
+    "rights": "Wszelkie prawa zastrzeżone."
+  },
+  "version": "Wersja:"
 }

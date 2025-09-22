@@ -10,5 +10,20 @@
   "goBackHome": "Go Back Home",
   "usernameRequired": "Username is required",
   "passwordRequired": "Password is required",
-  "loggingIn": "Logging in..."
+  "loggingIn": "Logging in...",
+  "header": {
+    "brand": "Extranet",
+    "home": "Home",
+    "contact": "Contact",
+    "logout": "Log out"
+  }
+  ,
+  "footer": {
+    "tagline": "Portal for owners and managers",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "copyright": "YourSpain",
+    "rights": "All rights reserved."
+  },
+  "version": "Version:"
 }
