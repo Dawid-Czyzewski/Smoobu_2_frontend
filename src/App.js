@@ -10,6 +10,7 @@ import { useUser } from "./context/UserProvider";
 import { useTranslation } from "react-i18next";
 import AuthGuard from "./components/AuthGuard";
 import { useState, useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   function AppRoutes() {
@@ -70,15 +71,15 @@ function App() {
       );
     }
 
-    return (
-      <div className="flex h-screen w-full font-sans overflow-hidden">
-        {!hideLayout && layoutReady && <NavPanel isMobileMenuOpen={isMobileMenuOpen} closeMobileMenu={closeMobileMenu} />}
-        
-        <div className="flex flex-col flex-1 h-screen">
-          {!hideLayout && layoutReady && <Header onToggleMobileMenu={toggleMobileMenu} isMobileMenuOpen={isMobileMenuOpen} />}
-          <main className="flex-1 overflow-y-auto">
-            <div className="min-h-full flex flex-col">
-              <div className="flex-1">
+        return (
+          <div className="flex h-screen w-full font-sans overflow-hidden">
+            {!hideLayout && layoutReady && <NavPanel isMobileMenuOpen={isMobileMenuOpen} closeMobileMenu={closeMobileMenu} />}
+            
+            <div className="flex flex-col flex-1 h-screen">
+              {!hideLayout && layoutReady && <Header onToggleMobileMenu={toggleMobileMenu} isMobileMenuOpen={isMobileMenuOpen} />}
+              <main className="flex-1 overflow-y-auto">
+                <div className="min-h-full flex flex-col">
+                  <div className="flex-1">
                 <Routes>
                   <Route
                     path="/login"
@@ -152,6 +153,28 @@ function App() {
   return (
     <HashRouter>
       <AppRoutes />
+      <Toaster 
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: '#363636',
+            color: '#fff',
+          },
+          success: {
+            duration: 3000,
+            style: {
+              background: '#10B981',
+            },
+          },
+          error: {
+            duration: 5000,
+            style: {
+              background: '#EF4444',
+            },
+          },
+        }}
+      />
     </HashRouter>
   );
 }

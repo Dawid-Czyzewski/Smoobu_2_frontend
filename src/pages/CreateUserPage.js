@@ -169,7 +169,7 @@ export default function CreateUserPage() {
         </p>
       </div>
 
-      <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
@@ -183,7 +183,7 @@ export default function CreateUserPage() {
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                 placeholder={t('users.form.namePlaceholder') || 'Enter name'}
               />
             </div>
@@ -198,7 +198,7 @@ export default function CreateUserPage() {
                 name="surname"
                 value={formData.surname}
                 onChange={handleInputChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                 placeholder={t('users.form.surnamePlaceholder') || 'Enter surname'}
               />
             </div>
@@ -214,7 +214,7 @@ export default function CreateUserPage() {
               name="email"
               value={formData.email}
               onChange={handleInputChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
               placeholder={t('users.form.emailPlaceholder') || 'Enter email'}
             />
           </div>
@@ -229,7 +229,7 @@ export default function CreateUserPage() {
               name="username"
               value={formData.username}
               onChange={handleInputChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
               placeholder={t('users.form.usernamePlaceholder') || 'Enter username'}
             />
           </div>
@@ -244,7 +244,7 @@ export default function CreateUserPage() {
               name="phone"
               value={formData.phone}
               onChange={handleInputChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
               placeholder={t('users.form.phonePlaceholder') || '+48123456789 (optional)'}
             />
           </div>
@@ -258,9 +258,10 @@ export default function CreateUserPage() {
               name="role"
               value={formData.role}
               onChange={handleInputChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
             >
               <option value="ROLE_USER">{t('roles.User') || 'User'}</option>
+              <option value="ROLE_ADMIN">{t('roles.Admin') || 'Admin'}</option>
             </select>
           </div>
 
@@ -275,7 +276,7 @@ export default function CreateUserPage() {
                 name="password"
                 value={formData.password}
                 onChange={handleInputChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                 placeholder={t('users.form.passwordPlaceholder') || 'Enter password'}
               />
             </div>
@@ -290,7 +291,7 @@ export default function CreateUserPage() {
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleInputChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                 placeholder={t('users.form.confirmPasswordPlaceholder') || 'Confirm password'}
               />
             </div>
@@ -308,7 +309,7 @@ export default function CreateUserPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full sm:w-auto px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors cursor-pointer disabled:opacity-50"
+              className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-lg hover:from-amber-600 hover:to-orange-600 transition-colors cursor-pointer disabled:opacity-50"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">

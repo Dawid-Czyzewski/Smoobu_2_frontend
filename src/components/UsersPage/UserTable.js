@@ -1,11 +1,13 @@
 import { useTranslation } from "react-i18next";
+import { getHighestRole } from "../../utils/roleUtils";
+import ActionButton from "../common/ActionButton";
 
-export default function UserTable({ users, onSort, sortField, sortDirection }) {
+export default function UserTable({ users, onSort, sortField, sortDirection, onDelete }) {
   const { t } = useTranslation();
 
   return (
     <div className="hidden lg:block overflow-x-auto">
-      <table className="min-w-full divide-y divide-gray-200">
+      <table className="min-w-full divide-y divide-gray-100">
         <thead className="bg-gray-50">
           <tr>
             <th 
@@ -54,9 +56,9 @@ export default function UserTable({ users, onSort, sortField, sortDirection }) {
             <tr key={user.id} className="hover:bg-gray-50">
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex items-center">
-                  <div className="h-10 w-10 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-600 text-white text-sm font-bold">
-                    {`${user.name?.[0] || ''}${user.surname?.[0] || ''}`.toUpperCase()}
-                  </div>
+                <div className="h-10 w-10 flex items-center justify-center rounded-full bg-gradient-to-br from-amber-500 to-orange-500 text-white text-sm font-bold">
+                  {`${user.name?.[0] || ''}${user.surname?.[0] || ''}`.toUpperCase()}
+                </div>
                   <div className="ml-4">
                     <div className="text-sm font-medium text-gray-900">
                       {`${user.name || ''} ${user.surname || ''}`.trim()}
@@ -72,26 +74,26 @@ export default function UserTable({ users, onSort, sortField, sortDirection }) {
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                  user.roles.includes('ROLE_ADMIN') 
-                    ? 'bg-purple-100 text-purple-800' 
-                    : 'bg-green-100 text-green-800'
+                  getHighestRole(user.roles) === 'Admin'
+                    ? 'bg-amber-100 text-amber-800' 
+                    : 'bg-emerald-100 text-emerald-800'
                 }`}>
-                  {user.roles.includes('ROLE_ADMIN') ? t('roles.Admin') : t('roles.User')}
+                  {getHighestRole(user.roles) === 'Admin' ? t('roles.Admin') : t('roles.User')}
                 </span>
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 {user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}
               </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <button className="text-green-600 hover:text-green-900 mr-3 cursor-pointer">
-                          {t('users.view')}
-                        </button>
-                        <button className="text-blue-600 hover:text-blue-900 mr-3 cursor-pointer">
-                          {t('users.edit')}
-                        </button>
-                        <button className="text-red-600 hover:text-red-900 cursor-pointer">
-                          {t('users.delete')}
-                        </button>
+                        <div className="flex items-center gap-2">
+                          <ActionButton type="view" size="md" />
+                          <ActionButton type="edit" size="md" />
+                          <ActionButton 
+                            type="delete" 
+                            size="md" 
+                            onClick={() => onDelete(user)}
+                          />
+                        </div>
                       </td>
             </tr>
           ))}

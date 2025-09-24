@@ -121,10 +121,15 @@ export async function del(url) {
   return apiFetch(url, { method: 'DELETE' });
 }
 
+export async function deleteUser(userId) {
+  return apiFetch(`/users/${userId}`, { method: 'DELETE' });
+}
+
 export default {
   get,
   post,
   put,
   del,
+  deleteUser,
   fetch: apiFetch
 };

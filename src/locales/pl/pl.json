@@ -35,6 +35,7 @@
     "Admin": "Administrator",
     "User": "Użytkownik",
     "USER": "Użytkownik",
+    "ADMIN": "Administrator",
     "Manager": "Menedżer"
   },
   "nav": {
@@ -64,11 +65,22 @@
         "view": "Podgląd",
         "edit": "Edytuj",
         "delete": "Usuń",
+        "deleteConfirm": {
+          "title": "Usuń użytkownika",
+          "message": "Czy na pewno chcesz usunąć tego użytkownika? Ta akcja nie może zostać cofnięta.",
+          "cancel": "Anuluj",
+          "delete": "Usuń",
+          "deleting": "Usuwanie..."
+        },
     "loading": "Ładowanie użytkowników...",
     "error": "Błąd",
     "fetchError": "Nie udało się pobrać użytkowników",
     "accessDenied": "Brak dostępu",
     "adminRequired": "Potrzebujesz uprawnień administratora, aby uzyskać dostęp do tej strony.",
+    "deleteSuccess": "Użytkownik \"{name} {surname}\" ({email}) został pomyślnie usunięty!",
+    "deleteError": "Błąd podczas usuwania użytkownika \"{name} {surname}\": {error}",
+    "authRequired": "Wymagana autoryzacja. Zaloguj się ponownie.",
+    "accessDeniedDelete": "Brak dostępu. Potrzebujesz uprawnień administratora, aby usuwać użytkowników.",
     "addUser": "Dodaj użytkownika",
     "searchPlaceholder": "Szukaj we wszystkich polach...",
     "filterByRole": "Filtruj według roli:",

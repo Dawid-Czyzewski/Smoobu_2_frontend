@@ -82,7 +82,7 @@ export default function LoginPage() {
             id="username"
             name="username"
             type="text"
-            className={`border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#F29416] ${
+            className={`border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 ${
               errors.username ? 'border-red-400' : 'border-gray-300'
             }`}
             placeholder={t('usernamePlaceholder') || 'Wpisz swoją nazwę użytkownika'}
@@ -108,7 +108,7 @@ export default function LoginPage() {
             id="password"
             name="password"
             type="password"
-            className={`border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#F29416] ${
+            className={`border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 ${
               errors.password ? 'border-red-400' : 'border-gray-300'
             }`}
             placeholder={t('passwordPlaceholder')}

@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { getHighestRole } from "../../utils/roleUtils";
 
 export default function SearchAndFilters({ 
   searchTerm, 
@@ -36,11 +37,11 @@ export default function SearchAndFilters({
                 onClick={() => onTabChange("all")}
                 className={`px-2 sm:px-3 py-1 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer ${
                   activeTab === "all"
-                    ? "bg-blue-600 text-white shadow-md"
+                    ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                 }`}
               >
-                {t('users.all')} ({users.filter(u => !u.roles.includes('ROLE_ADMIN')).length})
+                {t('users.all')} ({users.length})
               </button>
               {availableRoles.map(role => (
                 <button
@@ -48,11 +49,15 @@ export default function SearchAndFilters({
                   onClick={() => onTabChange(role)}
                   className={`px-2 sm:px-3 py-1 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer ${
                     activeTab === role
-                      ? "bg-green-600 text-white shadow-md"
+                      ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md"
                       : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                   }`}
                 >
-                  {t(`roles.${role.replace('ROLE_', '')}`)} ({users.filter(u => u.roles.includes(role)).length})
+                  {t(`roles.${role.replace('ROLE_', '')}`)} ({users.filter(u => {
+                    const highestRole = getHighestRole(u.roles);
+                    const roleToCheck = highestRole === 'Admin' ? 'ROLE_ADMIN' : 'ROLE_USER';
+                    return roleToCheck === role;
+                  }).length})
                 </button>
               ))}
             </div>
