@@ -23,7 +23,7 @@ export default function Pagination({
             <button
               onClick={() => onPageChange(Math.max(1, currentPage - 1))}
               disabled={currentPage === 1}
-              className="px-2 lg:px-3 py-1 border border-gray-300 rounded-md text-xs lg:text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+              className="px-2 lg:px-3 py-1 border border-gray-300 rounded-md text-xs lg:text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 cursor-pointer"
             >
               {t('users.previous')}
             </button>
@@ -42,7 +42,7 @@ export default function Pagination({
                 <button
                   key={page}
                   onClick={() => onPageChange(page)}
-                  className={`px-2 lg:px-3 py-1 border rounded-md text-xs lg:text-sm ${
+                  className={`px-2 lg:px-3 py-1 border rounded-md text-xs lg:text-sm cursor-pointer ${
                     currentPage === page
                       ? "bg-blue-600 text-white border-blue-600"
                       : "border-gray-300 hover:bg-gray-50"
@@ -55,7 +55,7 @@ export default function Pagination({
             <button
               onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
               disabled={currentPage === totalPages}
-              className="px-2 lg:px-3 py-1 border border-gray-300 rounded-md text-xs lg:text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+              className="px-2 lg:px-3 py-1 border border-gray-300 rounded-md text-xs lg:text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 cursor-pointer"
             >
               {t('users.next')}
             </button>

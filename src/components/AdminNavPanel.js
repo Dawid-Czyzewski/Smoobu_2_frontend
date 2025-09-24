@@ -58,7 +58,7 @@ export default function AdminNavPanel({ isMobileMenuOpen, closeMobileMenu }) {
           )}
           <button
             onClick={toggleCollapse}
-            className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 transition-all duration-200"
+            className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 transition-all duration-200 cursor-pointer"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {isCollapsed ? (
@@ -95,7 +95,7 @@ export default function AdminNavPanel({ isMobileMenuOpen, closeMobileMenu }) {
         <div className="mb-6">
           <Link
             to="/"
-            className={`flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+            className={`flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${
               isActive("/")
                 ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
                 : "text-slate-300 hover:bg-slate-700 hover:text-white"
@@ -124,7 +124,7 @@ export default function AdminNavPanel({ isMobileMenuOpen, closeMobileMenu }) {
               <li>
                 <Link
                   to="/admin/users"
-                  className={`flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+                  className={`flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${
                     isActive("/admin/users")
                       ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
                       : "text-slate-300 hover:bg-slate-700 hover:text-white"
@@ -155,7 +155,7 @@ export default function AdminNavPanel({ isMobileMenuOpen, closeMobileMenu }) {
               <h1 className="text-xl font-bold text-white">{t('header.brand')}</h1>
               <button
                 onClick={closeMobileMenu}
-                className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 transition-all duration-200"
+                className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 transition-all duration-200 cursor-pointer"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -187,7 +187,7 @@ export default function AdminNavPanel({ isMobileMenuOpen, closeMobileMenu }) {
               <Link
                 to="/"
                 onClick={closeMobileMenu}
-                className={`flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+                className={`flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${
                   isActive("/")
                     ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
                     : "text-slate-300 hover:bg-slate-700 hover:text-white"
@@ -205,7 +205,7 @@ export default function AdminNavPanel({ isMobileMenuOpen, closeMobileMenu }) {
               <Link
                 to="/contact"
                 onClick={closeMobileMenu}
-                className={`flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+                className={`flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${
                   isActive("/contact")
                     ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
                     : "text-slate-300 hover:bg-slate-700 hover:text-white"
@@ -231,7 +231,7 @@ export default function AdminNavPanel({ isMobileMenuOpen, closeMobileMenu }) {
                     <Link
                       to="/admin/users"
                       onClick={closeMobileMenu}
-                      className={`flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+                      className={`flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${
                         isActive("/admin/users")
                           ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
                           : "text-slate-300 hover:bg-slate-700 hover:text-white"

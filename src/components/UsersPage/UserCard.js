@@ -27,10 +27,13 @@ export default function UserCard({ user }) {
             {user.roles.includes('ROLE_ADMIN') ? t('roles.Admin') : t('roles.User')}
           </span>
           <div className="flex space-x-1 sm:space-x-2">
-            <button className="text-blue-600 hover:text-blue-900 text-xs">
+            <button className="text-green-600 hover:text-green-900 text-xs cursor-pointer">
+              {t('users.view')}
+            </button>
+            <button className="text-blue-600 hover:text-blue-900 text-xs cursor-pointer">
               {t('users.edit')}
             </button>
-            <button className="text-red-600 hover:text-red-900 text-xs">
+            <button className="text-red-600 hover:text-red-900 text-xs cursor-pointer">
               {t('users.delete')}
             </button>
           </div>

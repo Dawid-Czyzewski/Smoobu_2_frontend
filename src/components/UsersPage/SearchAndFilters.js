@@ -34,7 +34,7 @@ export default function SearchAndFilters({
             <div className="flex flex-wrap gap-1 sm:gap-2">
               <button
                 onClick={() => onTabChange("all")}
-                className={`px-2 sm:px-3 py-1 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 ${
+                className={`px-2 sm:px-3 py-1 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer ${
                   activeTab === "all"
                     ? "bg-blue-600 text-white shadow-md"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
@@ -46,7 +46,7 @@ export default function SearchAndFilters({
                 <button
                   key={role}
                   onClick={() => onTabChange(role)}
-                  className={`px-2 sm:px-3 py-1 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 ${
+                  className={`px-2 sm:px-3 py-1 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer ${
                     activeTab === role
                       ? "bg-green-600 text-white shadow-md"
                       : "bg-gray-200 text-gray-700 hover:bg-gray-300"

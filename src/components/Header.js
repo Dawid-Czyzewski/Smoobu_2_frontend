@@ -19,6 +19,7 @@ export default function Header({ onToggleMobileMenu, isMobileMenuOpen }) {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+
   const handleLogout = useCallback(() => {
     clearToken();
     navigate("/login", { replace: true });
@@ -27,7 +28,9 @@ export default function Header({ onToggleMobileMenu, isMobileMenuOpen }) {
   const isActive = (path) => location.pathname === path;
 
   const changeLanguage = (e) => {
-    i18n.changeLanguage(e.target.value);
+    const newLanguage = e.target.value;
+    i18n.changeLanguage(newLanguage);
+    localStorage.setItem('language', newLanguage);
   };
 
   return (
@@ -60,7 +63,7 @@ export default function Header({ onToggleMobileMenu, isMobileMenuOpen }) {
           {isMobile && (
             <button
               onClick={onToggleMobileMenu}
-              className="p-2 rounded-lg bg-slate-700 text-white shadow-lg hover:bg-slate-600 transition-all duration-200"
+              className="p-2 rounded-lg bg-slate-700 text-white shadow-lg hover:bg-slate-600 transition-all duration-200 cursor-pointer"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {isMobileMenuOpen ? (
@@ -83,7 +86,7 @@ export default function Header({ onToggleMobileMenu, isMobileMenuOpen }) {
 
           <button
             onClick={handleLogout}
-            className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-red-600 to-red-700 px-4 py-2 text-sm font-medium text-white shadow-lg hover:from-red-700 hover:to-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-slate-800 transition-all duration-200"
+            className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-red-600 to-red-700 px-4 py-2 text-sm font-medium text-white shadow-lg hover:from-red-700 hover:to-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-slate-800 transition-all duration-200 cursor-pointer"
           >
             {t('header.logout')}
           </button>

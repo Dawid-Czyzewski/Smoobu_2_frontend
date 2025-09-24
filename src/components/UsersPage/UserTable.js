@@ -82,14 +82,17 @@ export default function UserTable({ users, onSort, sortField, sortDirection }) {
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 {new Date(user.created_at).toLocaleDateString()}
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                <button className="text-blue-600 hover:text-blue-900 mr-3">
-                  {t('users.edit')}
-                </button>
-                <button className="text-red-600 hover:text-red-900">
-                  {t('users.delete')}
-                </button>
-              </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <button className="text-green-600 hover:text-green-900 mr-3 cursor-pointer">
+                          {t('users.view')}
+                        </button>
+                        <button className="text-blue-600 hover:text-blue-900 mr-3 cursor-pointer">
+                          {t('users.edit')}
+                        </button>
+                        <button className="text-red-600 hover:text-red-900 cursor-pointer">
+                          {t('users.delete')}
+                        </button>
+                      </td>
             </tr>
           ))}
         </tbody>
