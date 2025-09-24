@@ -2,9 +2,8 @@ import { useUser } from "../context/UserProvider";
 import { isAdmin } from "../utils/roleUtils";
 import AdminNavPanel from "./AdminNavPanel";
 
-export default function NavPanel() {
+export default function NavPanel({ isMobileMenuOpen, closeMobileMenu }) {
   const { fullUser } = useUser();
 
-  // Always show AdminNavPanel - it contains both user and admin sections
-  return <AdminNavPanel />;
+  return <AdminNavPanel isMobileMenuOpen={isMobileMenuOpen} closeMobileMenu={closeMobileMenu} />;
 }

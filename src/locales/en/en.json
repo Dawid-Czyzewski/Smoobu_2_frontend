@@ -33,7 +33,9 @@
   ,
   "roles": {
     "Admin": "Admin",
-    "User": "User"
+    "User": "User",
+    "USER": "User",
+    "Manager": "Manager"
   },
   "nav": {
     "profile": "Profile",
@@ -49,5 +51,32 @@
       "reservations": "Reservations",
       "payments": "Payments"
     }
+  },
+  "users": {
+    "title": "Users Management",
+    "subtitle": "Manage system users and their permissions",
+    "list": "Users List",
+    "name": "Name",
+    "email": "Email",
+    "role": "Role",
+    "createdAt": "Created At",
+    "actions": "Actions",
+    "edit": "Edit",
+    "delete": "Delete",
+    "loading": "Loading users...",
+    "error": "Error",
+    "fetchError": "Failed to fetch users",
+    "accessDenied": "Access Denied",
+    "adminRequired": "You need administrator privileges to access this page.",
+    "addUser": "Add User",
+    "searchPlaceholder": "Search in all fields...",
+    "filterByRole": "Filter by role:",
+    "all": "All",
+    "showing": "Showing",
+    "to": "to",
+    "of": "of",
+    "results": "results",
+    "previous": "Previous",
+    "next": "Next"
   }
 }

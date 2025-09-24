@@ -33,7 +33,9 @@
   ,
   "roles": {
     "Admin": "Administrator",
-    "User": "Użytkownik"
+    "User": "Użytkownik",
+    "USER": "Użytkownik",
+    "Manager": "Menedżer"
   },
   "nav": {
     "profile": "Profil",
@@ -49,5 +51,32 @@
       "reservations": "Rezerwacje",
       "payments": "Płatności"
     }
+  },
+  "users": {
+    "title": "Zarządzanie użytkownikami",
+    "subtitle": "Zarządzaj użytkownikami systemu i ich uprawnieniami",
+    "list": "Lista użytkowników",
+    "name": "Imię i nazwisko",
+    "email": "Email",
+    "role": "Rola",
+    "createdAt": "Data utworzenia",
+    "actions": "Akcje",
+    "edit": "Edytuj",
+    "delete": "Usuń",
+    "loading": "Ładowanie użytkowników...",
+    "error": "Błąd",
+    "fetchError": "Nie udało się pobrać użytkowników",
+    "accessDenied": "Brak dostępu",
+    "adminRequired": "Potrzebujesz uprawnień administratora, aby uzyskać dostęp do tej strony.",
+    "addUser": "Dodaj użytkownika",
+    "searchPlaceholder": "Szukaj we wszystkich polach...",
+    "filterByRole": "Filtruj według roli:",
+    "all": "Wszyscy",
+    "showing": "Pokazano",
+    "to": "do",
+    "of": "z",
+    "results": "wyników",
+    "previous": "Poprzednia",
+    "next": "Następna"
   }
 }

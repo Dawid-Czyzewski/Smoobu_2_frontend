@@ -1,21 +1,62 @@
 import { HashRouter, Route, Routes, useLocation } from "react-router";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import UsersPage from "./pages/UsersPage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import NavPanel from "./components/NavPanel";
 import { useUser } from "./context/UserProvider";
 import { useTranslation } from "react-i18next";
 import AuthGuard from "./components/AuthGuard";
+import { useState, useEffect } from "react";
 
 function App() {
   function AppRoutes() {
     const location = useLocation();
     const { isAuthenticated, loading, loadingUser } = useUser();
     const { t } = useTranslation();
-    const validPaths = ["/", "/login", "/contact"];
+    const [isMobile, setIsMobile] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    
+    const validPaths = ["/", "/login", "/contact", "/admin/users"];
     const hideLayout = location.pathname === "/login" || !validPaths.includes(location.pathname);
     const layoutReady = !loading && (!isAuthenticated || (isAuthenticated && !loadingUser));
+
+    const toggleMobileMenu = () => {
+      setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
+    const closeMobileMenu = () => {
+      setIsMobileMenuOpen(false);
+    };
+
+    useEffect(() => {
+      const checkMobile = () => {
+        setIsMobile(window.innerWidth < 1024);
+      };
+      
+      checkMobile();
+      window.addEventListener('resize', checkMobile);
+      return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    useEffect(() => {
+      if (isMobile) {
+        setIsMobileMenuOpen(false);
+      }
+    }, [isMobile]);
+
+    useEffect(() => {
+      if (isMobileMenuOpen) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'unset';
+      }
+      
+      return () => {
+        document.body.style.overflow = 'unset';
+      };
+    }, [isMobileMenuOpen]);
 
     if (!hideLayout && isAuthenticated && (loading || loadingUser)) {
       return (
@@ -30,9 +71,10 @@ function App() {
 
     return (
       <div className="flex min-h-screen w-full font-sans">
-        {!hideLayout && layoutReady && <NavPanel />}
+        {!hideLayout && layoutReady && <NavPanel isMobileMenuOpen={isMobileMenuOpen} closeMobileMenu={closeMobileMenu} />}
+        
         <div className="flex flex-col flex-1 min-h-screen">
-          {!hideLayout && layoutReady && <Header />}
+          {!hideLayout && layoutReady && <Header onToggleMobileMenu={toggleMobileMenu} isMobileMenuOpen={isMobileMenuOpen} />}
           <main className="flex-1 overflow-auto">
             <Routes>
               <Route
@@ -64,6 +106,15 @@ function App() {
                       <h1 className="text-xl font-bold">Kontakt</h1>
                       <p>Napisz do nas: support@example.com</p>
                     </div>
+                  </AuthGuard>
+                }
+              />
+
+              <Route
+                path="/admin/users"
+                element={
+                  <AuthGuard type="private">
+                    <UsersPage />
                   </AuthGuard>
                 }
               />
