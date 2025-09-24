@@ -7,18 +7,26 @@ import SearchAndFilters from "../components/UsersPage/SearchAndFilters";
 import UserCard from "../components/UsersPage/UserCard";
 import UserTable from "../components/UsersPage/UserTable";
 import Pagination from "../components/UsersPage/Pagination";
+import { useNavigate, useLocation } from "react-router";
+import { get } from "../services/apiService";
+import toast from "react-hot-toast";
 
 export default function UsersPage() {
   const { t } = useTranslation();
   const { fullUser } = useUser();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [hasLoaded, setHasLoaded] = useState(false);
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [loadingPages, setLoadingPages] = useState(new Set());
   const [searchTerm, setSearchTerm] = useState("");
   const [sortField, setSortField] = useState("name");
   const [sortDirection, setSortDirection] = useState("asc");
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(10);
+      const [itemsPerPage] = useState(10);
   const [activeTab, setActiveTab] = useState("all");
 
   useEffect(() => {
@@ -26,139 +34,112 @@ export default function UsersPage() {
       setLoading(false);
       return;
     }
+  }, [fullUser?.roles]);
+
+  useEffect(() => {
+    if (!isAdmin(fullUser?.roles)) {
+      return;
+    }
+    
+    if (hasLoaded) {
+      setLoading(false);
+      return;
+    }
+    
     const fetchUsers = async () => {
       try {
         setLoading(true);
-
-        const mockUsers = [
-          {
-            id: 1,
-            name: "Jan",
-            surname: "Kowalski",
-            email: "jan.kowalski@example.com",
-            roles: ["ROLE_USER"],
-            created_at: "2024-01-15T10:30:00Z"
-          },
-          {
-            id: 2,
-            name: "Anna",
-            surname: "Nowak",
-            email: "anna.nowak@example.com",
-            roles: ["ROLE_ADMIN"],
-            created_at: "2024-01-10T14:20:00Z"
-          },
-          {
-            id: 3,
-            name: "Piotr",
-            surname: "Wiśniewski",
-            email: "piotr.wisniewski@example.com",
-            roles: ["ROLE_USER"],
-            created_at: "2024-01-20T09:15:00Z"
-          },
-          {
-            id: 4,
-            name: "Katarzyna",
-            surname: "Dąbrowska",
-            email: "katarzyna.dabrowska@example.com",
-            roles: ["ROLE_USER"],
-            created_at: "2024-02-01T11:00:00Z"
-          },
-          {
-            id: 5,
-            name: "Marek",
-            surname: "Lewandowski",
-            email: "marek.lewandowski@example.com",
-            roles: ["ROLE_USER"],
-            created_at: "2024-02-05T16:45:00Z"
-          },
-          {
-            id: 6,
-            name: "Zofia",
-            surname: "Wójcik",
-            email: "zofia.wojcik@example.com",
-            roles: ["ROLE_USER"],
-            created_at: "2024-02-10T08:00:00Z"
-          },
-          {
-            id: 7,
-            name: "Tomasz",
-            surname: "Kamiński",
-            email: "tomasz.kaminski@example.com",
-            roles: ["ROLE_USER"],
-            created_at: "2024-02-15T13:20:00Z"
-          },
-          {
-            id: 8,
-            name: "Magdalena",
-            surname: "Zielińska",
-            email: "magdalena.zielinska@example.com",
-            roles: ["ROLE_USER"],
-            created_at: "2024-02-20T09:45:00Z"
-          },
-          {
-            id: 9,
-            name: "Paweł",
-            surname: "Szymański",
-            email: "pawel.szymanski@example.com",
-            roles: ["ROLE_USER"],
-            created_at: "2024-02-25T16:10:00Z"
-          },
-          {
-            id: 10,
-            name: "Agnieszka",
-            surname: "Woźniak",
-            email: "agnieszka.wozniak@example.com",
-            roles: ["ROLE_USER"],
-            created_at: "2024-03-01T11:30:00Z"
-          },
-          {
-            id: 11,
-            name: "Michał",
-            surname: "Kozłowski",
-            email: "michal.kozlowski@example.com",
-            roles: ["ROLE_USER"],
-            created_at: "2024-03-05T14:15:00Z"
-          },
-          {
-            id: 12,
-            name: "Ewa",
-            surname: "Jankowska",
-            email: "ewa.jankowska@example.com",
-            roles: ["ROLE_USER"],
-            created_at: "2024-03-10T10:00:00Z"
-          }
-        ];
         
-        setUsers(mockUsers);
+        const firstResponse = await get('/users?page=1');
+        
+        if (!firstResponse.ok) {
+          throw new Error('Failed to fetch users');
+        }
+        
+        const firstData = await firstResponse.json();
+        
+        let totalItems, firstPageUsers;
+        if (Array.isArray(firstData)) {
+          firstPageUsers = firstData;
+          totalItems = firstData.length;
+        } else {
+          totalItems = firstData['hydra:totalItems'] || 0;
+          firstPageUsers = firstData['hydra:member'] || [];
+        }
+        
+        const itemsPerPage = 10;
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+        
+        setTotalUsers(totalItems);
+        const allUsers = [];
+
+        allUsers.push(...firstPageUsers);
+        
+        if (!Array.isArray(firstData)) {
+          const pagePromises = [];
+          for (let page = 2; page <= totalPages; page++) {
+            pagePromises.push(
+              get(`/users?page=${page}`).then(response => {
+                if (response.ok) {
+                  return response.json();
+                }
+                throw new Error(`Failed to fetch page ${page}`);
+              })
+            );
+          }
+          
+          if (pagePromises.length > 0) {
+            const remainingPages = await Promise.all(pagePromises);
+            remainingPages.forEach(pageData => {
+              const pageUsers = pageData['hydra:member'] || [];
+              allUsers.push(...pageUsers);
+            });
+          }
+        }
+        
+        const filteredUsers = allUsers.filter(user => !user.roles.includes('ROLE_ADMIN'));
+        
+        setUsers(filteredUsers);
+        setHasLoaded(true);
       } catch (err) {
-        setError(t('users.fetchError'));
-        console.error('Error fetching users:', err);
+        toast.error(t('users.fetchError') || 'Failed to fetch users');
+        setError(t('users.fetchError') || 'Failed to fetch users');
       } finally {
         setLoading(false);
       }
     };
 
     fetchUsers();
-  }, [t, fullUser?.roles]);
+  }, [t, hasLoaded]);
 
-  // Get unique roles (excluding admin)
+  useEffect(() => {
+    if (location.state?.newUser) {
+      const newUser = location.state.newUser;
+      setUsers(prevUsers => {
+        const userExists = prevUsers.some(user => user.id === newUser.id);
+        if (!userExists) {
+          return [...prevUsers, newUser];
+        }
+        return prevUsers;
+      });
+      setTotalUsers(prev => prev + 1);
+      navigate(location.pathname, { replace: true, state: {} });
+    }
+  }, [location.state, navigate, location.pathname]);
+
   const availableRoles = useMemo(() => {
     const roles = new Set();
     users.forEach(user => {
       user.roles.forEach(role => {
-        if (role !== 'ROLE_ADMIN') {
-          roles.add(role);
-        }
+        roles.add(role);
       });
     });
     return Array.from(roles);
   }, [users]);
 
-  // Filter and sort users
   const filteredAndSortedUsers = useMemo(() => {
     let filtered = users;
 
-    // Filter by search term - search in all fields
     if (searchTerm) {
       filtered = filtered.filter(user => {
         const searchLower = searchTerm.toLowerCase();
@@ -168,22 +149,15 @@ export default function UsersPage() {
           user.email?.toLowerCase().includes(searchLower) ||
           user.id?.toString().includes(searchTerm) ||
           user.roles?.join(' ').toLowerCase().includes(searchLower) ||
-          new Date(user.created_at).toLocaleDateString().includes(searchTerm)
+          new Date(user.createdAt).toLocaleDateString().includes(searchTerm)
         );
       });
     }
 
-    // Filter by role tab - exclude admins from all views
-    if (activeTab === "all") {
-      filtered = filtered.filter(user => !user.roles.includes('ROLE_ADMIN'));
-    } else {
-      // Filter by specific role (excluding admin)
-      filtered = filtered.filter(user => 
-        !user.roles.includes('ROLE_ADMIN') && user.roles.includes(activeTab)
-      );
-    }
+        if (activeTab !== "all") {
+          filtered = filtered.filter(user => user.roles.includes(activeTab));
+        }
 
-    // Sort
     filtered.sort((a, b) => {
       let aValue = a[sortField];
       let bValue = b[sortField];
@@ -208,12 +182,10 @@ export default function UsersPage() {
     return filtered;
   }, [users, searchTerm, sortField, sortDirection, activeTab]);
 
-  // Pagination
   const totalPages = Math.ceil(filteredAndSortedUsers.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedUsers = filteredAndSortedUsers.slice(startIndex, startIndex + itemsPerPage);
 
-  // Handle sort
   const handleSort = (field) => {
     if (sortField === field) {
       setSortDirection(sortDirection === "asc" ? "desc" : "asc");
@@ -224,19 +196,21 @@ export default function UsersPage() {
     setCurrentPage(1);
   };
 
-  // Handle search
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
     setCurrentPage(1);
   };
 
-  // Handle tab change
   const handleTabChange = (tab) => {
     setActiveTab(tab);
     setCurrentPage(1);
   };
 
-  // Check if user is admin - after hooks
+  const handleOpenCreateUser = () => {
+    navigate('/admin/users/create');
+  };
+
+
   if (!isAdmin(fullUser?.roles)) {
     return (
       <div className="p-6">
@@ -280,7 +254,7 @@ export default function UsersPage() {
 
   return (
     <div className="p-2 sm:p-4 lg:p-6">
-      <PageHeader />
+          <PageHeader onAddUser={handleOpenCreateUser} />
       
       <SearchAndFilters
         searchTerm={searchTerm}
@@ -320,6 +294,7 @@ export default function UsersPage() {
           totalItems={filteredAndSortedUsers.length}
         />
       </div>
+
     </div>
   );
-}
+  }

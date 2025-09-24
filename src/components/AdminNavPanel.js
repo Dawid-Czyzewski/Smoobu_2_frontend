@@ -11,7 +11,12 @@ export default function AdminNavPanel({ isMobileMenuOpen, closeMobileMenu }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  const isActive = (path) => location.pathname === path;
+  const isActive = (path) => {
+    if (path === '/admin/users') {
+      return location.pathname === '/admin/users' || location.pathname.startsWith('/admin/users/');
+    }
+    return location.pathname === path;
+  };
 
   useEffect(() => {
     const checkMobile = () => {

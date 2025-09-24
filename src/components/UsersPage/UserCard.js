@@ -40,7 +40,7 @@ export default function UserCard({ user }) {
         </div>
       </div>
       <div className="mt-2 text-xs text-gray-500">
-        {t('users.createdAt')}: {new Date(user.created_at).toLocaleDateString()}
+        {t('users.createdAt')}: {user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}
       </div>
     </div>
   );

@@ -20,7 +20,6 @@ export function UserProvider({ children }) {
       const data = await userService.getCurrentUser();
       setFullUser(data);
     } catch (error) {
-      console.error("❌ Błąd podczas pobierania danych użytkownika:", error);
       setFullUser(null);
     } finally {
       setLoadingUser(false);

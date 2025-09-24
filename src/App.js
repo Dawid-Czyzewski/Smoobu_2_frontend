@@ -2,6 +2,7 @@ import { HashRouter, Route, Routes, useLocation } from "react-router";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import UsersPage from "./pages/UsersPage";
+import CreateUserPage from "./pages/CreateUserPage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import NavPanel from "./components/NavPanel";
@@ -18,7 +19,7 @@ function App() {
     const [isMobile, setIsMobile] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     
-    const validPaths = ["/", "/login", "/contact", "/admin/users"];
+    const validPaths = ["/", "/login", "/contact", "/admin/users", "/admin/users/create"];
     const hideLayout = location.pathname === "/login" || !validPaths.includes(location.pathname);
     const layoutReady = !loading && (!isAuthenticated || (isAuthenticated && !loadingUser));
 
@@ -117,6 +118,15 @@ function App() {
                     element={
                       <AuthGuard type="private">
                         <UsersPage />
+                      </AuthGuard>
+                    }
+                  />
+
+                  <Route
+                    path="/admin/users/create"
+                    element={
+                      <AuthGuard type="private">
+                        <CreateUserPage />
                       </AuthGuard>
                     }
                   />
