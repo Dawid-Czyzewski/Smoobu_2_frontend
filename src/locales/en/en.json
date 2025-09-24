@@ -13,7 +13,7 @@
   "loggingIn": "Logging in...",
   "header": {
     "brand": "Extranet",
-    "home": "Home",
+    "home": "Dashboard",
     "contact": "Contact",
     "logout": "Log out"
   }
@@ -26,4 +26,28 @@
     "rights": "All rights reserved."
   },
   "version": "Version:"
+  ,
+  "loading": {
+    "user": "Loading user…"
+  }
+  ,
+  "roles": {
+    "Admin": "Admin",
+    "User": "User"
+  },
+  "nav": {
+    "profile": "Profile",
+    "admin": {
+      "title": "Admin",
+      "dashboard": "Dashboard",
+      "users": "Users",
+      "settings": "Settings",
+      "reports": "Reports"
+    },
+    "user": {
+      "apartments": "My Apartments",
+      "reservations": "Reservations",
+      "payments": "Payments"
+    }
+  }
 }

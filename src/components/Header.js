@@ -20,36 +20,36 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-20 w-full border-b bg-white/80 backdrop-blur">
-      <div className="w-full flex h-14 items-center justify-between px-4 sm:px-6 lg:px-8">
-        <nav className="flex items-center gap-1 ml-0">
+    <header className="sticky top-0 z-20 w-full border-b border-slate-700 bg-slate-800/90 backdrop-blur">
+      <div className="w-full flex h-16 items-center justify-between px-6 sm:px-8 lg:px-10">
+        <nav className="flex items-center gap-2 ml-0">
           <Link
             to="/"
-            className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
               isActive("/") 
-                ? "text-indigo-700 bg-indigo-50" 
-                : "text-gray-700 hover:text-indigo-700 hover:bg-gray-100"
+                ? "text-white bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg" 
+                : "text-slate-300 hover:text-white hover:bg-slate-700"
             }`}
           >
             {t('header.home')}
           </Link>
           <Link
             to="/contact"
-            className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
               isActive("/contact") 
-                ? "text-indigo-700 bg-indigo-50" 
-                : "text-gray-700 hover:text-indigo-700 hover:bg-gray-100"
+                ? "text-white bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg" 
+                : "text-slate-300 hover:text-white hover:bg-slate-700"
             }`}
           >
             {t('header.contact')}
           </Link>
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
           <select
             onChange={changeLanguage}
             value={i18n.language}
-            className="rounded-md border border-gray-300 bg-white px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            className="rounded-lg border border-slate-600 bg-slate-700 text-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             <option value="en">English</option>
             <option value="pl">Polski</option>
@@ -57,7 +57,7 @@ export default function Header() {
 
           <button
             onClick={handleLogout}
-            className="inline-flex items-center gap-2 rounded-md bg-red-600 px-3 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+            className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-red-600 to-red-700 px-4 py-2 text-sm font-medium text-white shadow-lg hover:from-red-700 hover:to-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-slate-800 transition-all duration-200"
           >
             {t('header.logout')}
           </button>

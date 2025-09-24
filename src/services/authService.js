@@ -1,5 +1,5 @@
 import { API_URL } from '../config';
-import { setToken, clearToken, getToken, parseJwt, isTokenValid } from './tokenService';
+import { setToken, setRefreshToken, clearToken, getToken, getRefreshToken, parseJwt, isTokenValid } from './tokenService';
 
 export async function login({ username, password }, persistToken = false) {
   const res = await fetch(`${API_URL}/login`, {
@@ -17,25 +17,37 @@ export async function login({ username, password }, persistToken = false) {
   }
 
   const data = await res.json();
-  const { token } = data;
+  const { token, refresh_token } = data;
 
   if (!token) {
     throw new Error('Brak tokena w odpowiedzi logowania');
   }
 
+  if (!refresh_token) {
+    throw new Error('Brak refresh tokena w odpowiedzi logowania');
+  }
+
   setToken(token, persistToken);
+  setRefreshToken(refresh_token, persistToken);
   const user = parseJwt(token);
 
-  return { token, user };
+  return { token, refresh_token, user };
 }
 
 export async function refreshToken() {
+  const refreshTokenValue = getRefreshToken();
+  
+  if (!refreshTokenValue) {
+    throw new Error('Brak refresh tokena');
+  }
+
   const res = await fetch(`${API_URL}/token/refresh`, {
     method: 'POST',
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
-    }
+    },
+    body: JSON.stringify({ refresh_token: refreshTokenValue })
   });
 
   if (!res.ok) {
@@ -44,16 +56,24 @@ export async function refreshToken() {
   }
 
   const data = await res.json();
-  const { token } = data;
+  const { token, refresh_token } = data;
 
   if (!token) {
     throw new Error('Brak tokena w odpowiedzi refresh');
   }
 
+  if (!refresh_token) {
+    throw new Error('Brak nowego refresh tokena w odpowiedzi - backend powinien zwrócić nowy refresh token');
+  }
+
+  // Always save the new JWT token
   setToken(token, true);
+  
+  // Always save the new refresh token
+  setRefreshToken(refresh_token, true);
 
   const user = parseJwt(token);
-  return { token, user };
+  return { token, refresh_token, user };
 }
 
 export function logout() {

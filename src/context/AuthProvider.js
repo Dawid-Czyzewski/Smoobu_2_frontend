@@ -33,7 +33,8 @@ export function AuthProvider({ children }) {
 
         setUser(refreshedUser || (token ? parseJwt(token) : null));
       } catch (e) {
-
+        // On refresh failure, force logout to clear token and session
+        authService.logout();
         if (mounted) setUser(null);
       } finally {
         if (mounted) setLoading(false);

@@ -1,5 +1,7 @@
 let inMemoryToken = null;
+let inMemoryRefreshToken = null;
 const TOKEN_KEY = 'token';
+const REFRESH_TOKEN_KEY = 'refresh_token';
 
 function emitTokenChange(token) {
   try {
@@ -24,6 +26,17 @@ export function setToken(token, persist = false) {
   emitTokenChange(token);
 }
 
+export function setRefreshToken(refreshToken, persist = false) {
+  inMemoryRefreshToken = refreshToken;
+  if (persist) {
+    try {
+      localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
+    } catch (e) {
+      console.warn('Nie udało się zapisać refresh tokena do localStorage', e);
+    }
+  }
+}
+
 export function getToken() {
   if (inMemoryToken) return inMemoryToken;
   try {
@@ -38,10 +51,26 @@ export function getToken() {
   return null;
 }
 
+export function getRefreshToken() {
+  if (inMemoryRefreshToken) return inMemoryRefreshToken;
+  try {
+    const stored = localStorage.getItem(REFRESH_TOKEN_KEY);
+    if (stored) {
+      inMemoryRefreshToken = stored;
+      return stored;
+    }
+  } catch (e) {
+
+  }
+  return null;
+}
+
 export function clearToken() {
   inMemoryToken = null;
+  inMemoryRefreshToken = null;
   try {
     localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(REFRESH_TOKEN_KEY);
   } catch (e) {
 
   }

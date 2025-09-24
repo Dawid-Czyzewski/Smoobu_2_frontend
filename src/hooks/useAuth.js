@@ -19,6 +19,8 @@ export default function useAuth() {
         if (!mounted) return;
         setUser(refreshedUser || (token ? parseJwt(token) : null));
       } catch (e) {
+        // On refresh failure, log out to clear token
+        authService.logout();
         if (mounted) setUser(null);
       } finally {
         if (mounted) setLoading(false);
@@ -69,7 +71,7 @@ export default function useAuth() {
       setUser(userObj);
       return userObj;
     } catch (e) {
-
+      // On refresh failure, log out to clear token
       authService.logout();
       setUser(null);
       throw e;

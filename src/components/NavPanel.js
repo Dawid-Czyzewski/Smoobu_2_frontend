@@ -1,9 +1,10 @@
+import { useUser } from "../context/UserProvider";
+import { isAdmin } from "../utils/roleUtils";
+import AdminNavPanel from "./AdminNavPanel";
+
 export default function NavPanel() {
-    return (
-        <nav
-            className="h-screen w-[14vw] min-w-[220px] max-w-[400px] bg-gray-200 p-4 flex flex-col overflow-y-auto shadow"
-        >
-            NAVIGATION PANEL
-        </nav>
-    );
+  const { fullUser } = useUser();
+
+  // Always show AdminNavPanel - it contains both user and admin sections
+  return <AdminNavPanel />;
 }
