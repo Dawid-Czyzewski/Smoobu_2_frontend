@@ -43,14 +43,14 @@ export default function AdminNavPanel({ isMobileMenuOpen, closeMobileMenu }) {
           onClick={closeMobileMenu}
         />
       )}
-      {!isMobile && (
-        <nav
-          className={`h-screen bg-gradient-to-b from-slate-900 to-slate-800 flex flex-col overflow-y-auto shadow-2xl border-r border-slate-700 transition-all duration-300 ${
-            isCollapsed 
-              ? 'w-16 min-w-[64px]' 
-              : 'w-[14vw] min-w-[220px] max-w-[280px]'
-          }`}
-        >
+          {!isMobile && (
+            <nav
+              className={`h-screen bg-gradient-to-b from-slate-900 to-slate-800 flex flex-col shadow-2xl border-r border-slate-700 transition-all duration-300 ${
+                isCollapsed 
+                  ? 'w-16 min-w-[64px]' 
+                  : 'w-[14vw] min-w-[220px] max-w-[280px]'
+              }`}
+            >
       <div className={`p-4 border-b border-slate-700 ${isCollapsed ? 'px-2' : 'px-4'}`}>
         <div className="flex items-center justify-between">
           {!isCollapsed && (
@@ -91,7 +91,7 @@ export default function AdminNavPanel({ isMobileMenuOpen, closeMobileMenu }) {
         </div>
       )}
 
-      <div className="flex-1 p-4">
+      <div className="flex-1 p-4 overflow-y-auto">
         <div className="mb-6">
           <Link
             to="/"
@@ -182,7 +182,7 @@ export default function AdminNavPanel({ isMobileMenuOpen, closeMobileMenu }) {
             </div>
           )}
 
-          <div className="flex-1 p-4">
+          <div className="flex-1 p-4 overflow-y-auto">
             <div className="mb-6">
               <Link
                 to="/"

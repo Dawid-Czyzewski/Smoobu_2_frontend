@@ -70,66 +70,70 @@ function App() {
     }
 
     return (
-      <div className="flex min-h-screen w-full font-sans">
+      <div className="flex h-screen w-full font-sans overflow-hidden">
         {!hideLayout && layoutReady && <NavPanel isMobileMenuOpen={isMobileMenuOpen} closeMobileMenu={closeMobileMenu} />}
         
-        <div className="flex flex-col flex-1 min-h-screen">
+        <div className="flex flex-col flex-1 h-screen">
           {!hideLayout && layoutReady && <Header onToggleMobileMenu={toggleMobileMenu} isMobileMenuOpen={isMobileMenuOpen} />}
-          <main className="flex-1 overflow-auto">
-            <Routes>
-              <Route
-                path="/login"
-                element={
-                  <AuthGuard type="public">
-                    <LoginPage />
-                  </AuthGuard>
-                }
-              />
+          <main className="flex-1 overflow-y-auto">
+            <div className="min-h-full flex flex-col">
+              <div className="flex-1">
+                <Routes>
+                  <Route
+                    path="/login"
+                    element={
+                      <AuthGuard type="public">
+                        <LoginPage />
+                      </AuthGuard>
+                    }
+                  />
 
-              <Route
-                path="/"
-                element={
-                  <AuthGuard type="private">
-                    <div className="p-4">
-                      <h1 className="text-xl font-bold">Dashboard</h1>
-                      <p>Witamy w panelu!</p>
-                    </div>
-                  </AuthGuard>
-                }
-              />
+                  <Route
+                    path="/"
+                    element={
+                      <AuthGuard type="private">
+                        <div className="p-4">
+                          <h1 className="text-xl font-bold">Dashboard</h1>
+                          <p>Witamy w panelu!</p>
+                        </div>
+                      </AuthGuard>
+                    }
+                  />
 
-              <Route
-                path="/contact"
-                element={
-                  <AuthGuard type="private">
-                    <div className="p-4">
-                      <h1 className="text-xl font-bold">Kontakt</h1>
-                      <p>Napisz do nas: support@example.com</p>
-                    </div>
-                  </AuthGuard>
-                }
-              />
+                  <Route
+                    path="/contact"
+                    element={
+                      <AuthGuard type="private">
+                        <div className="p-4">
+                          <h1 className="text-xl font-bold">Kontakt</h1>
+                          <p>Napisz do nas: support@example.com</p>
+                        </div>
+                      </AuthGuard>
+                    }
+                  />
 
-              <Route
-                path="/admin/users"
-                element={
-                  <AuthGuard type="private">
-                    <UsersPage />
-                  </AuthGuard>
-                }
-              />
+                  <Route
+                    path="/admin/users"
+                    element={
+                      <AuthGuard type="private">
+                        <UsersPage />
+                      </AuthGuard>
+                    }
+                  />
 
-              <Route
-                path="*"
-                element={
-                  <AuthGuard type="public">
-                    <NotFoundPage />
-                  </AuthGuard>
-                }
-              />
-            </Routes>
+                  <Route
+                    path="*"
+                    element={
+                      <AuthGuard type="public">
+                        <NotFoundPage />
+                      </AuthGuard>
+                    }
+                  />
+                </Routes>
+              </div>
+              {!hideLayout && layoutReady && <Footer />}
+            </div>
           </main>
-          {!hideLayout && layoutReady && <Footer />}
         </div>
       </div>
     );

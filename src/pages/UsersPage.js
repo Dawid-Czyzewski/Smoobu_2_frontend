@@ -18,7 +18,7 @@ export default function UsersPage() {
   const [sortField, setSortField] = useState("name");
   const [sortDirection, setSortDirection] = useState("asc");
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(3);
+  const [itemsPerPage] = useState(10);
   const [activeTab, setActiveTab] = useState("all");
 
   useEffect(() => {
@@ -54,6 +54,78 @@ export default function UsersPage() {
             email: "piotr.wisniewski@example.com",
             roles: ["ROLE_USER"],
             created_at: "2024-01-20T09:15:00Z"
+          },
+          {
+            id: 4,
+            name: "Katarzyna",
+            surname: "Dąbrowska",
+            email: "katarzyna.dabrowska@example.com",
+            roles: ["ROLE_USER"],
+            created_at: "2024-02-01T11:00:00Z"
+          },
+          {
+            id: 5,
+            name: "Marek",
+            surname: "Lewandowski",
+            email: "marek.lewandowski@example.com",
+            roles: ["ROLE_USER"],
+            created_at: "2024-02-05T16:45:00Z"
+          },
+          {
+            id: 6,
+            name: "Zofia",
+            surname: "Wójcik",
+            email: "zofia.wojcik@example.com",
+            roles: ["ROLE_USER"],
+            created_at: "2024-02-10T08:00:00Z"
+          },
+          {
+            id: 7,
+            name: "Tomasz",
+            surname: "Kamiński",
+            email: "tomasz.kaminski@example.com",
+            roles: ["ROLE_USER"],
+            created_at: "2024-02-15T13:20:00Z"
+          },
+          {
+            id: 8,
+            name: "Magdalena",
+            surname: "Zielińska",
+            email: "magdalena.zielinska@example.com",
+            roles: ["ROLE_USER"],
+            created_at: "2024-02-20T09:45:00Z"
+          },
+          {
+            id: 9,
+            name: "Paweł",
+            surname: "Szymański",
+            email: "pawel.szymanski@example.com",
+            roles: ["ROLE_USER"],
+            created_at: "2024-02-25T16:10:00Z"
+          },
+          {
+            id: 10,
+            name: "Agnieszka",
+            surname: "Woźniak",
+            email: "agnieszka.wozniak@example.com",
+            roles: ["ROLE_USER"],
+            created_at: "2024-03-01T11:30:00Z"
+          },
+          {
+            id: 11,
+            name: "Michał",
+            surname: "Kozłowski",
+            email: "michal.kozlowski@example.com",
+            roles: ["ROLE_USER"],
+            created_at: "2024-03-05T14:15:00Z"
+          },
+          {
+            id: 12,
+            name: "Ewa",
+            surname: "Jankowska",
+            email: "ewa.jankowska@example.com",
+            roles: ["ROLE_USER"],
+            created_at: "2024-03-10T10:00:00Z"
           }
         ];
         
