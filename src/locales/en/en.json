@@ -190,6 +190,18 @@
     "passwordOptional": "Optional - leave empty to keep current password",
     "passwordChanged": "Password changed successfully",
     "passwordTooShort": "Password must be at least 6 characters",
-    "passwordsDoNotMatch": "Passwords do not match"
+    "passwordsDoNotMatch": "Passwords do not match",
+    "invoiceInfo": "Invoice Information",
+    "country": "Country",
+    "city": "City",
+    "companyName": "Company Name",
+    "nip": "Tax ID (NIP)",
+    "address": "Address",
+    "invoiceEmail": "Invoice Email",
+    "invoiceInfoDescription": "Optional invoice information",
+    "userInfo": "User Information",
+    "noInvoiceData": "No invoice data available",
+    "addInvoiceData": "Add Invoice Data",
+    "removeInvoiceData": "Remove Invoice Data"
   }
 }

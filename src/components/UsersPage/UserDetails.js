@@ -88,7 +88,6 @@ export default function UserDetails({ userId }) {
 
   return (
     <div className="p-2 sm:p-4 lg:p-6">
-      {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-4">
           <button
@@ -111,9 +110,7 @@ export default function UserDetails({ userId }) {
         </div>
       </div>
 
-      {/* User Details */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-        {/* Avatar and Basic Info */}
         <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-8 border-b border-gray-200">
           <div className="flex items-center gap-6">
             <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
@@ -137,69 +134,112 @@ export default function UserDetails({ userId }) {
           </div>
         </div>
 
-        {/* Detailed Information */}
         <div className="p-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            {t('users.userInfo')}
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Personal Information */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">
-                {t('users.personalInfo')}
-              </h3>
+            <div className="space-y-3">
+              <div>
+                <label className="text-sm font-medium text-gray-500">{t('users.firstName')}</label>
+                <p className="text-gray-900 font-medium">{user.name || t('users.notProvided')}</p>
+              </div>
               
-              <div className="space-y-3">
-                <div>
-                  <label className="text-sm font-medium text-gray-500">{t('users.firstName')}</label>
-                  <p className="text-gray-900 font-medium">{user.name || t('users.notProvided')}</p>
-                </div>
-                
-                <div>
-                  <label className="text-sm font-medium text-gray-500">{t('users.lastName')}</label>
-                  <p className="text-gray-900 font-medium">{user.surname || t('users.notProvided')}</p>
-                </div>
-                
-                <div>
-                  <label className="text-sm font-medium text-gray-500">{t('users.email')}</label>
-                  <p className="text-gray-900 font-medium">{user.email || t('users.notProvided')}</p>
-                </div>
-                
-                <div>
-                  <label className="text-sm font-medium text-gray-500">{t('users.phone')}</label>
-                  <p className="text-gray-900 font-medium">{user.phone || t('users.notProvided')}</p>
-                </div>
+              <div>
+                <label className="text-sm font-medium text-gray-500">{t('users.lastName')}</label>
+                <p className="text-gray-900 font-medium">{user.surname || t('users.notProvided')}</p>
+              </div>
+              
+              <div>
+                <label className="text-sm font-medium text-gray-500">{t('users.email')}</label>
+                <p className="text-gray-900 font-medium">{user.email || t('users.notProvided')}</p>
+              </div>
+              
+              <div>
+                <label className="text-sm font-medium text-gray-500">{t('users.phone')}</label>
+                <p className="text-gray-900 font-medium">{user.phone || t('users.notProvided')}</p>
               </div>
             </div>
-
-            {/* Account Information */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">
-                {t('users.accountInfo')}
-              </h3>
+            
+            <div className="space-y-3">
+              <div>
+                <label className="text-sm font-medium text-gray-500">{t('users.username')}</label>
+                <p className="text-gray-900 font-medium">{user.username || t('users.notProvided')}</p>
+              </div>
               
-              <div className="space-y-3">
-                <div>
-                  <label className="text-sm font-medium text-gray-500">{t('users.username')}</label>
-                  <p className="text-gray-900 font-medium">{user.username || t('users.notProvided')}</p>
-                </div>
-                
-                <div>
-                  <label className="text-sm font-medium text-gray-500">{t('users.roles')}</label>
-                  <p className="text-gray-900 font-medium">{formatRoles(user.roles)}</p>
-                </div>
-                
-                <div>
-                  <label className="text-sm font-medium text-gray-500">{t('users.createdAt')}</label>
-                  <p className="text-gray-900 font-medium">{formatDate(user.createdAt)}</p>
-                </div>
-                
-                <div>
-                  <label className="text-sm font-medium text-gray-500">{t('users.userId')}</label>
-                  <p className="text-gray-900 font-medium font-mono text-sm">{user.id}</p>
-                </div>
+              <div>
+                <label className="text-sm font-medium text-gray-500">{t('users.roles')}</label>
+                <p className="text-gray-900 font-medium">{formatRoles(user.roles)}</p>
+              </div>
+              
+              <div>
+                <label className="text-sm font-medium text-gray-500">{t('users.createdAt')}</label>
+                <p className="text-gray-900 font-medium">{formatDate(user.createdAt)}</p>
+              </div>
+              
+              <div>
+                <label className="text-sm font-medium text-gray-500">{t('users.userId')}</label>
+                <p className="text-gray-900 font-medium font-mono text-sm">{user.id}</p>
               </div>
             </div>
           </div>
 
-          {/* Actions */}
+          <div className="mt-8 pt-6 border-t border-gray-200">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+              {t('users.invoiceInfo')}
+            </h3>
+            
+            {user.invoiceInfo ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {user.invoiceInfo.country && (
+                  <div>
+                    <label className="text-sm font-medium text-gray-500">{t('users.country')}</label>
+                    <p className="text-gray-900 font-medium">{user.invoiceInfo.country}</p>
+                  </div>
+                )}
+                
+                {user.invoiceInfo.city && (
+                  <div>
+                    <label className="text-sm font-medium text-gray-500">{t('users.city')}</label>
+                    <p className="text-gray-900 font-medium">{user.invoiceInfo.city}</p>
+                  </div>
+                )}
+                
+                {user.invoiceInfo.companyName && (
+                  <div>
+                    <label className="text-sm font-medium text-gray-500">{t('users.companyName')}</label>
+                    <p className="text-gray-900 font-medium">{user.invoiceInfo.companyName}</p>
+                  </div>
+                )}
+                
+                {user.invoiceInfo.nip && (
+                  <div>
+                    <label className="text-sm font-medium text-gray-500">{t('users.nip')}</label>
+                    <p className="text-gray-900 font-medium">{user.invoiceInfo.nip}</p>
+                  </div>
+                )}
+                
+                {user.invoiceInfo.address && (
+                  <div className="md:col-span-2">
+                    <label className="text-sm font-medium text-gray-500">{t('users.address')}</label>
+                    <p className="text-gray-900 font-medium">{user.invoiceInfo.address}</p>
+                  </div>
+                )}
+                
+                {user.invoiceInfo.email && (
+                  <div>
+                    <label className="text-sm font-medium text-gray-500">{t('users.invoiceEmail')}</label>
+                    <p className="text-gray-900 font-medium">{user.invoiceInfo.email}</p>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="text-center py-8">
+                <p className="text-gray-500">{t('users.noInvoiceData')}</p>
+              </div>
+            )}
+          </div>
+
           <div className="mt-8 pt-6 border-t border-gray-200">
             <div className="flex flex-col sm:flex-row gap-3">
               <button

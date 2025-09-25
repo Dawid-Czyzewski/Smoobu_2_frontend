@@ -22,7 +22,7 @@ export default function CreateUserPage() {
   const handleSubmit = async (formData) => {
     setLoading(true);
     try {
-      const response = await post('/users/register', {
+      const userData = {
         username: formData.username,
         email: formData.email,
         password: formData.password,
@@ -30,7 +30,11 @@ export default function CreateUserPage() {
         surname: formData.surname,
         phone: formData.phone || null,
         roles: [formData.role]
-      });
+      };
+
+      userData.invoiceInfo = formData.invoiceInfo;
+
+      const response = await post('/users/register', userData);
 
       const data = await response.json();
 
@@ -102,7 +106,7 @@ export default function CreateUserPage() {
           onSubmit={handleSubmit}
           onCancel={handleCancel}
           loading={loading}
-          showPasswordFields={false}
+          showPasswordFields={true}
           isEditing={false}
         />
       </div>

@@ -23,7 +23,7 @@ export function useUsers() {
 
   const isUserAdmin = useMemo(() => isAdmin(fullUser?.roles), [fullUser?.roles]);
   const fetchUsers = useCallback(async () => {
-    if (hasLoaded || isFetching) return; // Zapobiegaj wielokrotnemu wywołaniu
+    if (hasLoaded || isFetching) return;
     
     try {
       setIsFetching(true);

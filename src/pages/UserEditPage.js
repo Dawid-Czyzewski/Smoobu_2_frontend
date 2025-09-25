@@ -76,6 +76,8 @@ export default function UserEditPage() {
         updateData.confirmPassword = formData.confirmPassword;
       }
 
+      updateData.invoiceInfo = formData.invoiceInfo;
+
       const response = await put(`/users/${id}`, updateData);
       const data = await response.json();
 
