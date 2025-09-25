@@ -1,6 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { useUserDetails } from "../../hooks/useUserDetails";
+import { formatDate } from "../../utils/dateUtils";
+import { formatRoles } from "../../utils/roleUtils";
 
 export default function UserDetails({ userId }) {
   const { t } = useTranslation();
@@ -9,31 +11,6 @@ export default function UserDetails({ userId }) {
 
   const handleBack = () => {
     navigate('/admin/users');
-  };
-
-  const formatDate = (dateString) => {
-    if (!dateString) return t('users.notProvided');
-    return new Date(dateString).toLocaleDateString('pl-PL', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  };
-
-  const formatRoles = (roles) => {
-    if (!roles || roles.length === 0) return t('users.none');
-    return roles.map(role => {
-      switch (role) {
-        case 'ROLE_ADMIN':
-          return t('roles.Admin');
-        case 'ROLE_USER':
-          return t('roles.User');
-        default:
-          return role;
-      }
-    }).join(', ');
   };
 
   if (loading) {

@@ -7,6 +7,10 @@ import UsersPage from "./pages/UsersPage";
 import CreateUserPage from "./pages/CreateUserPage";
 import UserDetailsPage from "./pages/UserDetailsPage";
 import UserEditPage from "./pages/UserEditPage";
+import ApartmentsPage from "./pages/ApartmentsPage";
+import CreateApartmentPage from "./pages/CreateApartmentPage";
+import ApartmentDetailsPage from "./pages/ApartmentDetailsPage";
+import EditApartmentPage from "./pages/EditApartmentPage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import NavPanel from "./components/NavPanel";
@@ -24,9 +28,9 @@ function App() {
     const [isMobile, setIsMobile] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     
-    const validPaths = ["/", "/login", "/forgot-password", "/reset-password", "/contact", "/admin/users", "/admin/users/create"];
+    const validPaths = ["/", "/login", "/forgot-password", "/reset-password", "/contact", "/admin/users", "/admin/users/create", "/admin/apartments", "/admin/apartments/create"];
     const hideLayout = location.pathname === "/login" || location.pathname === "/forgot-password" || location.pathname === "/reset-password" || 
-                      (!validPaths.includes(location.pathname) && !location.pathname.startsWith("/admin/users/"));
+                      (!validPaths.includes(location.pathname) && !location.pathname.startsWith("/admin/users/") && !location.pathname.startsWith("/admin/apartments/"));
     const layoutReady = !loading && (!isAuthenticated || (isAuthenticated && !loadingUser));
 
     const toggleMobileMenu = () => {
@@ -172,6 +176,41 @@ function App() {
                       </AuthGuard>
                     }
                   />
+
+                  <Route
+                    path="/admin/apartments"
+                    element={
+                      <AuthGuard type="private">
+                        <ApartmentsPage />
+                      </AuthGuard>
+                    }
+                  />
+
+                  <Route
+                    path="/admin/apartments/create"
+                    element={
+                      <AuthGuard type="private">
+                        <CreateApartmentPage />
+                      </AuthGuard>
+                    }
+                  />
+
+                 <Route
+                   path="/admin/apartments/:id"
+                   element={
+                     <AuthGuard type="private">
+                       <ApartmentDetailsPage />
+                     </AuthGuard>
+                   }
+                 />
+                 <Route
+                   path="/admin/apartments/edit/:id"
+                   element={
+                     <AuthGuard type="private">
+                       <EditApartmentPage />
+                     </AuthGuard>
+                   }
+                 />
 
                   <Route
                     path="*"

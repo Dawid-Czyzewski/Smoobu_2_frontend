@@ -31,7 +31,8 @@ export async function apiFetch(url, options = {}) {
     ...options,
     credentials: 'include',
     headers: {
-      'Content-Type': 'application/json',
+      // Only set Content-Type if it's not already set (for FormData)
+      ...(options.headers && options.headers['Content-Type'] ? {} : { 'Content-Type': 'application/json' }),
       ...(options.headers || {})
     }
   });
@@ -103,10 +104,17 @@ export async function get(url) {
   return apiFetch(url, { method: 'GET' });
 }
 
-export async function post(url, data) {
+export async function post(url, data, options = {}) {
+  const headers = { ...options.headers };
+  
+  if (!(data instanceof FormData)) {
+    headers['Content-Type'] = 'application/json';
+  }
+  
   return apiFetch(url, {
     method: 'POST',
-    body: data ? JSON.stringify(data) : undefined
+    headers,
+    body: data ? (data instanceof FormData ? data : JSON.stringify(data)) : undefined
   });
 }
 

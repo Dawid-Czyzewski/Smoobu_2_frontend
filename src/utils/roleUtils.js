@@ -44,3 +44,23 @@ export function hasRole(roles, role) {
   }
   return roles.includes(role);
 }
+
+/**
+ * Formats roles array into readable string
+ * @param {Array} roles - Array of user roles
+ * @returns {string} - Formatted roles string
+ */
+export function formatRoles(roles) {
+  if (!roles || roles.length === 0) return 'None';
+  
+  return roles.map(role => {
+    switch (role) {
+      case 'ROLE_ADMIN':
+        return 'Admin';
+      case 'ROLE_USER':
+        return 'User';
+      default:
+        return role;
+    }
+  }).join(', ');
+}
