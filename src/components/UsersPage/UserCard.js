@@ -1,9 +1,15 @@
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
 import { getHighestRole } from "../../utils/roleUtils";
 import ActionButton from "../common/ActionButton";
 
 export default function UserCard({ user, onDelete }) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const handleViewUser = () => {
+    navigate(`/admin/users/${user.id}`);
+  };
 
   return (
     <div className="p-3 sm:p-4 border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-colors">
@@ -29,7 +35,11 @@ export default function UserCard({ user, onDelete }) {
             {getHighestRole(user.roles) === 'Admin' ? t('roles.Admin') : t('roles.User')}
           </span>
           <div className="flex flex-wrap gap-1 sm:gap-2">
-            <ActionButton type="view" size="sm" />
+            <ActionButton 
+              type="view" 
+              size="sm" 
+              onClick={handleViewUser}
+            />
             <ActionButton type="edit" size="sm" />
             <ActionButton 
               type="delete" 

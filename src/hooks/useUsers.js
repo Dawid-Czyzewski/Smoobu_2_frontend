@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useUser } from "../context/UserProvider";
 import { isAdmin, getHighestRole } from "../utils/roleUtils";
@@ -16,13 +16,17 @@ export function useUsers() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [hasLoaded, setHasLoaded] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
   const [totalUsers, setTotalUsers] = useState(0);
   const [deleteModal, setDeleteModal] = useState({ isOpen: false, user: null });
   const [deleting, setDeleting] = useState(false);
 
-  const isUserAdmin = isAdmin(fullUser?.roles);
-  const fetchUsers = async () => {
+  const isUserAdmin = useMemo(() => isAdmin(fullUser?.roles), [fullUser?.roles]);
+  const fetchUsers = useCallback(async () => {
+    if (hasLoaded || isFetching) return; // Zapobiegaj wielokrotnemu wywołaniu
+    
     try {
+      setIsFetching(true);
       setLoading(true);
       
       const firstResponse = await get('/users?page=1');
@@ -79,8 +83,9 @@ export function useUsers() {
       setError(t('users.fetchError') || 'Failed to fetch users');
     } finally {
       setLoading(false);
+      setIsFetching(false);
     }
-  };
+  }, [t, hasLoaded, isFetching]);
 
   const handleDeleteUser = async (user) => {
     if (!user) return;
@@ -140,18 +145,22 @@ export function useUsers() {
   useEffect(() => {
     if (!isUserAdmin) {
       setLoading(false);
+      setHasLoaded(false);
+      setIsFetching(false);
       return;
     }
   }, [isUserAdmin]);
 
   useEffect(() => {
-    if (!isUserAdmin || hasLoaded) {
+    if (!isUserAdmin) {
       setLoading(false);
       return;
     }
     
-    fetchUsers();
-  }, [isUserAdmin, hasLoaded]);
+    if (!hasLoaded && !isFetching) {
+      fetchUsers();
+    }
+  }, [isUserAdmin, hasLoaded, isFetching, fetchUsers]);
 
   useEffect(() => {
     if (location.state?.newUser) {

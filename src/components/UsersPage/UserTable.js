@@ -1,9 +1,15 @@
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
 import { getHighestRole } from "../../utils/roleUtils";
 import ActionButton from "../common/ActionButton";
 
 export default function UserTable({ users, onSort, sortField, sortDirection, onDelete }) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const handleViewUser = (user) => {
+    navigate(`/admin/users/${user.id}`);
+  };
 
   return (
     <div className="hidden lg:block overflow-x-auto">
@@ -86,7 +92,11 @@ export default function UserTable({ users, onSort, sortField, sortDirection, onD
               </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <div className="flex items-center gap-2">
-                          <ActionButton type="view" size="md" />
+                          <ActionButton 
+                            type="view" 
+                            size="md" 
+                            onClick={() => handleViewUser(user)}
+                          />
                           <ActionButton type="edit" size="md" />
                           <ActionButton 
                             type="delete" 

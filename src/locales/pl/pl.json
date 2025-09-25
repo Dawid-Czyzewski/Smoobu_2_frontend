@@ -159,6 +159,18 @@
         "createError": "Błąd podczas tworzenia użytkownika",
         "backToUsers": "Powrót do użytkowników",
         "createUserDescription": "Wypełnij poniższy formularz, aby utworzyć nowe konto użytkownika"
-      }
+      },
+    "firstName": "Imię",
+    "lastName": "Nazwisko",
+    "phone": "Telefon",
+    "roles": "Role",
+    "userId": "ID użytkownika",
+    "personalInfo": "Informacje osobiste",
+    "accountInfo": "Informacje o koncie",
+    "backToList": "Powrót do listy",
+    "userNotFound": "Użytkownik nie został znaleziony",
+    "notProvided": "Nie podano",
+    "none": "Brak",
+    "userDetails": "Szczegóły użytkownika"
   }
 }

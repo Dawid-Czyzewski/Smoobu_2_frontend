@@ -159,6 +159,18 @@
         "createError": "Error creating user",
         "backToUsers": "Back to Users",
         "createUserDescription": "Fill in the form below to create a new user account"
-      }
+      },
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phone": "Phone",
+    "roles": "Roles",
+    "userId": "User ID",
+    "personalInfo": "Personal Information",
+    "accountInfo": "Account Information",
+    "backToList": "Back to List",
+    "userNotFound": "User not found",
+    "notProvided": "Not provided",
+    "none": "None",
+    "userDetails": "User Details"
   }
 }

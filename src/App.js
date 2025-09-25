@@ -5,6 +5,7 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import UsersPage from "./pages/UsersPage";
 import CreateUserPage from "./pages/CreateUserPage";
+import UserDetailsPage from "./pages/UserDetailsPage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import NavPanel from "./components/NavPanel";
@@ -23,7 +24,8 @@ function App() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     
     const validPaths = ["/", "/login", "/forgot-password", "/reset-password", "/contact", "/admin/users", "/admin/users/create"];
-    const hideLayout = location.pathname === "/login" || location.pathname === "/forgot-password" || location.pathname === "/reset-password" || !validPaths.includes(location.pathname);
+    const hideLayout = location.pathname === "/login" || location.pathname === "/forgot-password" || location.pathname === "/reset-password" || 
+                      (!validPaths.includes(location.pathname) && !location.pathname.startsWith("/admin/users/"));
     const layoutReady = !loading && (!isAuthenticated || (isAuthenticated && !loadingUser));
 
     const toggleMobileMenu = () => {
@@ -148,6 +150,15 @@ function App() {
                     element={
                       <AuthGuard type="private">
                         <CreateUserPage />
+                      </AuthGuard>
+                    }
+                  />
+
+                  <Route
+                    path="/admin/users/:id"
+                    element={
+                      <AuthGuard type="private">
+                        <UserDetailsPage />
                       </AuthGuard>
                     }
                   />
