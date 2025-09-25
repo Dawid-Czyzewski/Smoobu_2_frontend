@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router';
+import { useNavigate, Link } from 'react-router';
 import useAuth from '../hooks/useAuth';
 
 export default function LoginPage() {
@@ -135,12 +135,12 @@ export default function LoginPage() {
         </button>
 
         <div className="text-center">
-          <a
-            href="#"
+          <Link
+            to="/forgot-password"
             className="text-sm text-black hover:underline cursor-pointer"
           >
             {t('forgotPassword')}
-          </a>
+          </Link>
         </div>
 
         <div className="text-center text-xs text-gray-400 mt-2">

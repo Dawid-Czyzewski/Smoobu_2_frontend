@@ -11,6 +11,41 @@
   "usernameRequired": "Username is required",
   "passwordRequired": "Password is required",
   "loggingIn": "Logging in...",
+  "auth": {
+    "forgotPassword": {
+      "title": "Forgot Password",
+      "subtitle": "Enter your email address and we'll send you a link to reset your password.",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "Enter your email address",
+      "sendResetLink": "Send Reset Link",
+      "sending": "Sending...",
+      "success": "If the email exists in our system, you will receive a password reset link.",
+      "error": "Failed to send reset email. Please try again.",
+      "emailRequired": "Email address is required",
+      "checkEmail": "Check Your Email",
+      "checkEmailMessage": "We've sent a password reset link to your email address.",
+      "backToLogin": "Back to Login"
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "subtitle": "Enter your new password for {{email}}",
+      "newPasswordLabel": "New Password",
+      "newPasswordPlaceholder": "Enter your new password",
+      "confirmPasswordLabel": "Confirm Password",
+      "confirmPasswordPlaceholder": "Confirm your new password",
+      "resetPassword": "Reset Password",
+      "resetting": "Resetting...",
+      "success": "Password has been reset successfully!",
+      "error": "Failed to reset password. Please try again.",
+      "invalidToken": "Invalid or expired reset token.",
+      "passwordRequired": "Password is required",
+      "passwordTooShort": "Password must be at least 6 characters long",
+      "passwordsDoNotMatch": "Passwords do not match",
+      "verifying": "Verifying Token",
+      "verifyingMessage": "Please wait while we verify your reset token...",
+      "backToLogin": "Back to Login"
+    }
+  },
   "header": {
     "brand": "Extranet",
     "home": "Dashboard",

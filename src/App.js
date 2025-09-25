@@ -1,5 +1,7 @@
 import { HashRouter, Route, Routes, useLocation } from "react-router";
 import LoginPage from "./pages/LoginPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import UsersPage from "./pages/UsersPage";
 import CreateUserPage from "./pages/CreateUserPage";
@@ -20,8 +22,8 @@ function App() {
     const [isMobile, setIsMobile] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     
-    const validPaths = ["/", "/login", "/contact", "/admin/users", "/admin/users/create"];
-    const hideLayout = location.pathname === "/login" || !validPaths.includes(location.pathname);
+    const validPaths = ["/", "/login", "/forgot-password", "/reset-password", "/contact", "/admin/users", "/admin/users/create"];
+    const hideLayout = location.pathname === "/login" || location.pathname === "/forgot-password" || location.pathname === "/reset-password" || !validPaths.includes(location.pathname);
     const layoutReady = !loading && (!isAuthenticated || (isAuthenticated && !loadingUser));
 
     const toggleMobileMenu = () => {
@@ -86,6 +88,24 @@ function App() {
                     element={
                       <AuthGuard type="public">
                         <LoginPage />
+                      </AuthGuard>
+                    }
+                  />
+
+                  <Route
+                    path="/forgot-password"
+                    element={
+                      <AuthGuard type="public">
+                        <ForgotPasswordPage />
+                      </AuthGuard>
+                    }
+                  />
+
+                  <Route
+                    path="/reset-password"
+                    element={
+                      <AuthGuard type="public">
+                        <ResetPasswordPage />
                       </AuthGuard>
                     }
                   />

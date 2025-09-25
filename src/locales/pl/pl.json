@@ -11,6 +11,41 @@
   "usernameRequired": "Username jest wymagany",
   "passwordRequired": "Hasło jest wymagane",
   "loggingIn": "Logowanie...",
+  "auth": {
+    "forgotPassword": {
+      "title": "Zapomniałeś hasła?",
+      "subtitle": "Wprowadź swój adres email, a wyślemy Ci link do resetowania hasła.",
+      "emailLabel": "Adres Email",
+      "emailPlaceholder": "Wprowadź swój adres email",
+      "sendResetLink": "Wyślij link resetujący",
+      "sending": "Wysyłanie...",
+      "success": "Jeśli email istnieje w naszym systemie, otrzymasz link do resetowania hasła.",
+      "error": "Nie udało się wysłać emaila resetującego. Spróbuj ponownie.",
+      "emailRequired": "Adres email jest wymagany",
+      "checkEmail": "Sprawdź swój email",
+      "checkEmailMessage": "Wysłaliśmy link do resetowania hasła na Twój adres email.",
+      "backToLogin": "Powrót do logowania"
+    },
+    "resetPassword": {
+      "title": "Resetowanie hasła",
+      "subtitle": "Wprowadź nowe hasło dla {{email}}",
+      "newPasswordLabel": "Nowe hasło",
+      "newPasswordPlaceholder": "Wprowadź nowe hasło",
+      "confirmPasswordLabel": "Potwierdź hasło",
+      "confirmPasswordPlaceholder": "Potwierdź nowe hasło",
+      "resetPassword": "Resetuj hasło",
+      "resetting": "Resetowanie...",
+      "success": "Hasło zostało pomyślnie zresetowane!",
+      "error": "Nie udało się zresetować hasła. Spróbuj ponownie.",
+      "invalidToken": "Nieprawidłowy lub wygasły token resetujący.",
+      "passwordRequired": "Hasło jest wymagane",
+      "passwordTooShort": "Hasło musi mieć co najmniej 6 znaków",
+      "passwordsDoNotMatch": "Hasła nie są identyczne",
+      "verifying": "Weryfikacja tokenu",
+      "verifyingMessage": "Proszę czekać, weryfikujemy Twój token resetujący...",
+      "backToLogin": "Powrót do logowania"
+    }
+  },
   "header": {
     "brand": "Extranet",
     "home": "Dashboard",
