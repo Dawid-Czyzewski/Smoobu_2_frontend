@@ -117,6 +117,7 @@
     "authRequired": "Wymagana autoryzacja. Zaloguj się ponownie.",
     "accessDeniedDelete": "Brak dostępu. Potrzebujesz uprawnień administratora, aby usuwać użytkowników.",
     "addUser": "Dodaj użytkownika",
+    "addUserDescription": "Wypełnij poniższy formularz, aby utworzyć nowe konto użytkownika",
     "searchPlaceholder": "Szukaj we wszystkich polach...",
     "filterByRole": "Filtruj według roli:",
     "all": "Wszyscy",
@@ -171,6 +172,24 @@
     "userNotFound": "Użytkownik nie został znaleziony",
     "notProvided": "Nie podano",
     "none": "Brak",
-    "userDetails": "Szczegóły użytkownika"
+    "userDetails": "Szczegóły użytkownika",
+    "editUser": "Edytuj użytkownika",
+    "editUserDescription": "Edytuj dane użytkownika w poniższym formularzu",
+    "updateUser": "Zaktualizuj użytkownika",
+    "updating": "Aktualizowanie...",
+    "usernameAvailable": "Nazwa użytkownika jest dostępna",
+    "usernameTaken": "Nazwa użytkownika jest już zajęta",
+    "usernameTakenToast": "Nazwa użytkownika jest już zajęta. Wybierz inną nazwę użytkownika.",
+    "usernameCheckingToast": "Poczekaj, sprawdzamy dostępność nazwy użytkownika.",
+    "usernameTooShortToast": "Nazwa użytkownika musi mieć co najmniej 3 znaki",
+    "usernameTooShort": "Nazwa użytkownika musi mieć co najmniej 3 znaki",
+    "checkUsernameFailed": "Nie udało się sprawdzić dostępności nazwy użytkownika",
+    "changePassword": "Zmień hasło",
+    "newPassword": "Nowe hasło",
+    "confirmNewPassword": "Potwierdź nowe hasło",
+    "passwordOptional": "Opcjonalne - zostaw puste, aby zachować obecne hasło",
+    "passwordChanged": "Hasło zostało zmienione pomyślnie",
+    "passwordTooShort": "Hasło musi mieć co najmniej 6 znaków",
+    "passwordsDoNotMatch": "Hasła nie są identyczne"
   }
 }

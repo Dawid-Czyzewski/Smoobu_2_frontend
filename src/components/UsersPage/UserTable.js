@@ -11,6 +11,10 @@ export default function UserTable({ users, onSort, sortField, sortDirection, onD
     navigate(`/admin/users/${user.id}`);
   };
 
+  const handleEditUser = (user) => {
+    navigate(`/admin/users/edit/${user.id}`);
+  };
+
   return (
     <div className="hidden lg:block overflow-x-auto">
       <table className="min-w-full divide-y divide-gray-100">
@@ -97,7 +101,11 @@ export default function UserTable({ users, onSort, sortField, sortDirection, onD
                             size="md" 
                             onClick={() => handleViewUser(user)}
                           />
-                          <ActionButton type="edit" size="md" />
+                          <ActionButton 
+                            type="edit" 
+                            size="md" 
+                            onClick={() => handleEditUser(user)}
+                          />
                           <ActionButton 
                             type="delete" 
                             size="md" 

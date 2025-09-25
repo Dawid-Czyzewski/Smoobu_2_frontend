@@ -117,6 +117,7 @@
     "authRequired": "Authentication required. Please log in again.",
     "accessDeniedDelete": "Access denied. You need administrator privileges to delete users.",
     "addUser": "Add User",
+    "addUserDescription": "Fill in the form below to create a new user account",
     "searchPlaceholder": "Search in all fields...",
     "filterByRole": "Filter by role:",
     "all": "All",
@@ -171,6 +172,24 @@
     "userNotFound": "User not found",
     "notProvided": "Not provided",
     "none": "None",
-    "userDetails": "User Details"
+    "userDetails": "User Details",
+    "editUser": "Edit User",
+    "editUserDescription": "Edit user data in the form below",
+    "updateUser": "Update User",
+    "updating": "Updating...",
+    "usernameAvailable": "Username is available",
+    "usernameTaken": "Username is already taken",
+    "usernameTakenToast": "Username is already taken. Please choose a different username.",
+    "usernameCheckingToast": "Please wait while we check username availability.",
+    "usernameTooShortToast": "Username must be at least 3 characters long",
+    "usernameTooShort": "Username must be at least 3 characters",
+    "checkUsernameFailed": "Failed to check username availability",
+    "changePassword": "Change Password",
+    "newPassword": "New Password",
+    "confirmNewPassword": "Confirm New Password",
+    "passwordOptional": "Optional - leave empty to keep current password",
+    "passwordChanged": "Password changed successfully",
+    "passwordTooShort": "Password must be at least 6 characters",
+    "passwordsDoNotMatch": "Passwords do not match"
   }
 }

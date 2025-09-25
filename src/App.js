@@ -6,6 +6,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import UsersPage from "./pages/UsersPage";
 import CreateUserPage from "./pages/CreateUserPage";
 import UserDetailsPage from "./pages/UserDetailsPage";
+import UserEditPage from "./pages/UserEditPage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import NavPanel from "./components/NavPanel";
@@ -159,6 +160,15 @@ function App() {
                     element={
                       <AuthGuard type="private">
                         <UserDetailsPage />
+                      </AuthGuard>
+                    }
+                  />
+
+                  <Route
+                    path="/admin/users/edit/:id"
+                    element={
+                      <AuthGuard type="private">
+                        <UserEditPage />
                       </AuthGuard>
                     }
                   />

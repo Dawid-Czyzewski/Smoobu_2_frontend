@@ -11,6 +11,10 @@ export default function UserCard({ user, onDelete }) {
     navigate(`/admin/users/${user.id}`);
   };
 
+  const handleEditUser = () => {
+    navigate(`/admin/users/edit/${user.id}`);
+  };
+
   return (
     <div className="p-3 sm:p-4 border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-colors">
       <div className="flex items-start justify-between">
@@ -40,7 +44,11 @@ export default function UserCard({ user, onDelete }) {
               size="sm" 
               onClick={handleViewUser}
             />
-            <ActionButton type="edit" size="sm" />
+            <ActionButton 
+              type="edit" 
+              size="sm" 
+              onClick={handleEditUser}
+            />
             <ActionButton 
               type="delete" 
               size="sm" 
