@@ -11,6 +11,7 @@ import ApartmentsPage from "./pages/ApartmentsPage";
 import ApartmentsDashboardPage from "./pages/ApartmentsDashboardPage";
 import CreateApartmentPage from "./pages/CreateApartmentPage";
 import ApartmentDetailsPage from "./pages/ApartmentDetailsPage";
+import ApartmentViewPage from "./pages/ApartmentViewPage";
 import EditApartmentPage from "./pages/EditApartmentPage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -31,7 +32,7 @@ function App() {
     
     const validPaths = ["/", "/login", "/forgot-password", "/reset-password", "/contact", "/admin/users", "/admin/users/create", "/admin/apartments", "/admin/apartments/create", "/apartments"];
     const hideLayout = location.pathname === "/login" || location.pathname === "/forgot-password" || location.pathname === "/reset-password" || 
-                      (!validPaths.includes(location.pathname) && !location.pathname.startsWith("/admin/users/") && !location.pathname.startsWith("/admin/apartments/"));
+                      (!validPaths.includes(location.pathname) && !location.pathname.startsWith("/admin/users/") && !location.pathname.startsWith("/admin/apartments/") && !location.pathname.startsWith("/apartments/"));
     const layoutReady = !loading && (!isAuthenticated || (isAuthenticated && !loadingUser));
 
     const toggleMobileMenu = () => {
@@ -192,6 +193,15 @@ function App() {
                     element={
                       <AuthGuard type="private">
                         <ApartmentsDashboardPage />
+                      </AuthGuard>
+                    }
+                  />
+
+                  <Route
+                    path="/apartments/:id"
+                    element={
+                      <AuthGuard type="private">
+                        <ApartmentViewPage />
                       </AuthGuard>
                     }
                   />

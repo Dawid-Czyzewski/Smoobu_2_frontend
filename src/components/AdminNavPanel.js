@@ -19,7 +19,7 @@ export default function AdminNavPanel({ isMobileMenuOpen, closeMobileMenu }) {
       return location.pathname === '/admin/apartments' || location.pathname.startsWith('/admin/apartments/');
     }
     if (path === '/apartments') {
-      return location.pathname === '/apartments';
+      return location.pathname === '/apartments' || location.pathname.startsWith('/apartments/');
     }
     return location.pathname === path;
   };

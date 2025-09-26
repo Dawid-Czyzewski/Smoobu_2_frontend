@@ -66,7 +66,7 @@ export default function ApartmentsDashboardPage() {
   }, [fetchApartments]);
 
   const handleApartmentClick = (apartment) => {
-    navigate(`/admin/apartments/${apartment.id}`);
+    navigate(`/apartments/${apartment.id}`);
   };
 
   // Filter apartments based on search term
