@@ -6,7 +6,6 @@ import ImageUpload from "./ImageUpload";
 export default function ApartmentForm({ 
   initialData = {}, 
   onSubmit, 
-  onCancel,
   loading = false,
   isEditing = false 
 }) {
@@ -32,6 +31,7 @@ export default function ApartmentForm({
       });
     }
   }, [initialData]);
+
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -151,33 +151,6 @@ export default function ApartmentForm({
         </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-3 pt-6">
-        <button
-          type="submit"
-          disabled={loading}
-          className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
-        >
-          {loading ? (
-            <span className="flex items-center justify-center">
-              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-              {isEditing ? t('apartments.form.updating') : t('apartments.form.creating')}
-            </span>
-          ) : (
-            isEditing ? t('apartments.form.updateApartment') : t('apartments.form.createApartment')
-          )}
-        </button>
-        
-        {onCancel && (
-          <button
-            type="button"
-            onClick={onCancel}
-            disabled={loading}
-            className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {t('apartments.form.cancel')}
-          </button>
-        )}
-      </div>
     </form>
   );
 }

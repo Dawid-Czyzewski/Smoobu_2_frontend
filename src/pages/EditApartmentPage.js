@@ -5,6 +5,7 @@ import { get, put } from "../services/apiService";
 import { useUser } from "../context/UserProvider";
 import { isAdmin } from "../utils/roleUtils";
 import ApartmentForm from "../components/ApartmentForm/ApartmentForm";
+import ShareholdersManager from "../components/ApartmentForm/ShareholdersManager";
 import toast, { Toaster } from "react-hot-toast";
 
 const fileToBase64 = (file) => {
@@ -26,6 +27,7 @@ export default function EditApartmentPage() {
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
   const [error, setError] = useState(null);
+  const [shareholders, setShareholders] = useState([]);
 
   const fetchApartment = useCallback(async () => {
     if (!isAdmin(fullUser?.roles)) {
@@ -54,7 +56,6 @@ export default function EditApartmentPage() {
       setApartment(data);
     } catch (err) {
       setError(t('apartments.fetchError'));
-      console.error("Error fetching apartment details:", err);
     } finally {
       setLoading(false);
     }
@@ -67,30 +68,64 @@ export default function EditApartmentPage() {
   const handleSubmit = async (formData, selectedFile) => {
     setUpdating(true);
     try {
+      
+      if (!formData.name || !formData.name.trim()) {
+        toast.error('Nazwa apartamentu jest wymagana');
+        setUpdating(false);
+        return;
+      }
+      
+      if (!formData.priceForClean || isNaN(parseFloat(formData.priceForClean))) {
+        toast.error('Cena za sprzątanie jest wymagana i musi być liczbą');
+        setUpdating(false);
+        return;
+      }
+      
+      if (!formData.vat || isNaN(parseFloat(formData.vat))) {
+        toast.error('VAT jest wymagany i musi być liczbą');
+        setUpdating(false);
+        return;
+      }
+
       const apartmentData = {
-        name: formData.name,
-        priceForClean: formData.priceForClean,
-        vat: formData.vat,
-        canFaktura: formData.canFaktura,
-        picture: formData.picture
+        name: formData.name.trim(),
+        priceForClean: parseFloat(formData.priceForClean),
+        vat: parseFloat(formData.vat),
+        canFaktura: Boolean(formData.canFaktura)
       };
       
       if (selectedFile) {
         const base64 = await fileToBase64(selectedFile);
         apartmentData.image = base64;
+      } else if (formData.picture && !formData.picture.startsWith('/uploads/')) {
+        apartmentData.picture = formData.picture;
+      } else {
+        apartmentData.picture = apartment.picture;
       }
-
       const response = await put(`/apartments/${id}`, apartmentData);
       
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.detail || 'Failed to update apartment');
+        throw new Error(errorData.detail || errorData.error || 'Failed to update apartment');
+      }
+      
+      const shareholdersData = shareholders.map(shareholder => ({
+        user_id: shareholder.userId,
+        procent: shareholder.percentage
+      }));
+      
+      const sharesResponse = await put(`/udzialy/apartment/${id}`, {
+        shareholders: shareholdersData
+      });
+      
+      if (!sharesResponse.ok) {
+        const sharesErrorData = await sharesResponse.json();
+        toast.error('Apartament został zaktualizowany, ale wystąpił błąd przy aktualizacji udziałowców');
       }
       
       toast.success(t('apartments.updateSuccess'));
       navigate('/admin/apartments');
     } catch (err) {
-      console.error('Error updating apartment:', err);
       toast.error(t('apartments.updateError') || 'Error updating apartment');
     } finally {
       setUpdating(false);
@@ -100,6 +135,10 @@ export default function EditApartmentPage() {
   const handleCancel = () => {
     navigate('/admin/apartments');
   };
+
+  const handleShareholdersChange = useCallback((newShareholders) => {
+    setShareholders(newShareholders);
+  }, []);
 
   if (loading) {
     return (
@@ -177,10 +216,45 @@ export default function EditApartmentPage() {
         <ApartmentForm
           initialData={apartment}
           onSubmit={handleSubmit}
-          onCancel={handleCancel}
           loading={updating}
           isEditing={true}
         />
+      </div>
+
+      <div className="mt-8 bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
+        <ShareholdersManager 
+          apartment={apartment} 
+          onShareholdersChange={handleShareholdersChange}
+        />
+      </div>
+
+      <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-start">
+        <button
+          onClick={() => {
+            const form = document.querySelector('form');
+            if (form) {
+              form.requestSubmit();
+            }
+          }}
+          disabled={updating}
+          className="px-6 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
+        >
+          {updating ? (
+            <span className="flex items-center justify-center">
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+              {t('apartments.form.updating')}
+            </span>
+          ) : (
+            t('apartments.form.updateApartment')
+          )}
+        </button>
+        
+        <button
+          onClick={handleCancel}
+          className="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors cursor-pointer"
+        >
+          {t('apartments.form.cancel')}
+        </button>
       </div>
     </div>
   );

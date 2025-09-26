@@ -57,6 +57,9 @@ export default function UserTable({ users, onSort, sortField, sortDirection, onD
               </div>
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              {t('shares.apartments')}
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               {t('users.actions')}
             </th>
           </tr>
@@ -94,7 +97,25 @@ export default function UserTable({ users, onSort, sortField, sortDirection, onD
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 {user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}
               </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                {user.udzialy && user.udzialy.length > 0 ? (
+                  <div className="flex flex-wrap gap-1">
+                    {user.udzialy
+                      .filter(share => share.apartment && share.apartment.name)
+                      .map((share, index) => (
+                        <span 
+                          key={index}
+                          className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800"
+                        >
+                          {share.apartment.name}
+                        </span>
+                      ))}
+                  </div>
+                ) : (
+                  <span className="text-gray-500">{t('shares.noApartments')}</span>
+                )}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <div className="flex items-center gap-2">
                           <ActionButton 
                             type="view" 

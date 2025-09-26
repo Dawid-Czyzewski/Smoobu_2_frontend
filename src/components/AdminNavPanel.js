@@ -18,6 +18,9 @@ export default function AdminNavPanel({ isMobileMenuOpen, closeMobileMenu }) {
     if (path === '/admin/apartments') {
       return location.pathname === '/admin/apartments' || location.pathname.startsWith('/admin/apartments/');
     }
+    if (path === '/apartments') {
+      return location.pathname === '/apartments';
+    }
     return location.pathname === path;
   };
 
@@ -100,7 +103,18 @@ export default function AdminNavPanel({ isMobileMenuOpen, closeMobileMenu }) {
           )}
 
       <div className="flex-1 p-4 overflow-y-auto">
+
         <div className="mb-6">
+          {!isCollapsed && (
+            <div className="px-3 mb-3">
+              <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                {t("nav.user.title")}
+              </h3>
+            </div>
+          )}
+          
+          <ul className="space-y-2">
+            <li>
               <Link
                 to="/"
                 className={`flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${
@@ -110,12 +124,30 @@ export default function AdminNavPanel({ isMobileMenuOpen, closeMobileMenu }) {
                 }`}
                 title={isCollapsed ? t("header.home") : ""}
               >
-            <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5a2 2 0 012-2h4a2 2 0 012 2v6H8V5z" />
-            </svg>
-            {!isCollapsed && <span className="ml-3">{t("header.home")}</span>}
-          </Link>
+                <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5a2 2 0 012-2h4a2 2 0 012 2v6H8V5z" />
+                </svg>
+                {!isCollapsed && <span className="ml-3">{t("header.home")}</span>}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/apartments"
+                className={`flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${
+                  isActive("/apartments")
+                    ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg"
+                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-800"
+                }`}
+                title={isCollapsed ? t("nav.user.apartments") : ""}
+              >
+                <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+                {!isCollapsed && <span className="ml-3">{t("nav.user.apartments")}</span>}
+              </Link>
+            </li>
+          </ul>
         </div>
 
         {isAdmin(fullUser?.roles) && (
@@ -210,24 +242,6 @@ export default function AdminNavPanel({ isMobileMenuOpen, closeMobileMenu }) {
           <div className="flex-1 p-4 overflow-y-auto">
             <div className="mb-6">
               <Link
-                to="/"
-                onClick={closeMobileMenu}
-                className={`flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${
-                  isActive("/")
-                    ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
-                    : "text-slate-300 hover:bg-slate-700 hover:text-white"
-                }`}
-              >
-                <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5a2 2 0 012-2h4a2 2 0 012 2v6H8V5z" />
-                </svg>
-                <span className="ml-3">{t("header.home")}</span>
-              </Link>
-            </div>
-
-            <div className="mb-6">
-              <Link
                 to="/contact"
                 onClick={closeMobileMenu}
                 className={`flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${
@@ -241,6 +255,50 @@ export default function AdminNavPanel({ isMobileMenuOpen, closeMobileMenu }) {
                 </svg>
                 <span className="ml-3">{t("header.contact")}</span>
               </Link>
+            </div>
+
+            <div className="mb-6">
+              <div className="px-3 mb-3">
+                <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                  {t("nav.user.title")}
+                </h3>
+              </div>
+              
+              <ul className="space-y-2">
+                <li>
+                  <Link
+                    to="/"
+                    onClick={closeMobileMenu}
+                    className={`flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${
+                      isActive("/")
+                        ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
+                        : "text-slate-300 hover:bg-slate-700 hover:text-white"
+                    }`}
+                  >
+                    <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5a2 2 0 012-2h4a2 2 0 012 2v6H8V5z" />
+                    </svg>
+                    <span className="ml-3">{t("header.home")}</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/apartments"
+                    onClick={closeMobileMenu}
+                    className={`flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${
+                      isActive("/apartments")
+                        ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
+                        : "text-slate-300 hover:bg-slate-700 hover:text-white"
+                    }`}
+                  >
+                    <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                    <span className="ml-3">{t("nav.user.apartments")}</span>
+                  </Link>
+                </li>
+              </ul>
             </div>
 
             {isAdmin(fullUser?.roles) && (

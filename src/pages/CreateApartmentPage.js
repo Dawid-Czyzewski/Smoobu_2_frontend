@@ -3,9 +3,10 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { useUser } from "../context/UserProvider";
 import { isAdmin } from "../utils/roleUtils";
-import { post } from "../services/apiService";
+import { post, put } from "../services/apiService";
 import toast, { Toaster } from "react-hot-toast";
 import ApartmentForm from "../components/ApartmentForm/ApartmentForm";
+import ShareholdersManagerForCreate from "../components/ApartmentForm/ShareholdersManagerForCreate";
 
 const fileToBase64 = (file) => {
   return new Promise((resolve, reject) => {
@@ -22,6 +23,7 @@ export default function CreateApartmentPage() {
   const { fullUser } = useUser();
   
   const [loading, setLoading] = useState(false);
+  const [shareholders, setShareholders] = useState([]);
 
   useEffect(() => {
     if (!isAdmin(fullUser?.roles)) {
@@ -66,7 +68,33 @@ export default function CreateApartmentPage() {
         return;
       }
 
-      toast.success(t('apartments.createSuccess'));
+      // Jeśli są udziałowcy, dodaj ich po utworzeniu apartamentu
+      if (shareholders.length > 0) {
+        try {
+          const shareholdersData = shareholders.map(shareholder => ({
+            user_id: shareholder.userId,
+            procent: shareholder.percentage
+          }));
+
+          const sharesResponse = await put(`/udzialy/apartment/${data.apartment.id}`, {
+            shareholders: shareholdersData
+          });
+
+          if (!sharesResponse.ok) {
+            const errorData = await sharesResponse.json();
+            console.error('Error creating shares:', errorData);
+            toast.error('Apartament został utworzony, ale wystąpił błąd przy dodawaniu udziałowców');
+          } else {
+            toast.success(t('apartments.createSuccess'));
+          }
+        } catch (error) {
+          console.error('Error creating shares:', error);
+          toast.error('Apartament został utworzony, ale wystąpił błąd przy dodawaniu udziałowców');
+        }
+      } else {
+        toast.success(t('apartments.createSuccess'));
+      }
+
       setTimeout(() => {
         navigate('/admin/apartments', { state: { newApartment: data.apartment } });
       }, 1500);
@@ -110,6 +138,41 @@ export default function CreateApartmentPage() {
           loading={loading}
           isEditing={false}
         />
+      </div>
+
+      <div className="mt-8 bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
+        <ShareholdersManagerForCreate 
+          onShareholdersChange={setShareholders}
+        />
+      </div>
+
+      <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-start">
+        <button
+          onClick={() => {
+            const form = document.querySelector('form');
+            if (form) {
+              form.requestSubmit();
+            }
+          }}
+          disabled={loading}
+          className="px-6 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
+        >
+          {loading ? (
+            <span className="flex items-center justify-center">
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+              {t('apartments.form.creating')}
+            </span>
+          ) : (
+            t('apartments.form.createApartment')
+          )}
+        </button>
+        
+        <button
+          onClick={handleCancel}
+          className="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors cursor-pointer"
+        >
+          {t('apartments.form.cancel')}
+        </button>
       </div>
     </div>
   );

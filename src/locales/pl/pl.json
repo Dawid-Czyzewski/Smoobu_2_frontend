@@ -84,6 +84,7 @@
       "reports": "Raporty"
     },
     "user": {
+      "title": "Użytkownik",
       "apartments": "Moje apartamenty",
       "reservations": "Rezerwacje",
       "payments": "Płatności"
@@ -267,6 +268,16 @@
     "updateSuccess": "Apartament został zaktualizowany pomyślnie!",
     "updateError": "Błąd podczas aktualizacji apartamentu",
     "authRequired": "Wymagane uwierzytelnienie",
+    "allApartments": "Wszystkie apartamenty",
+    "allApartmentsDescription": "Przeglądaj wszystkie apartamenty w systemie",
+    "myApartments": "Moje apartamenty",
+    "myApartmentsDescription": "Apartamenty w których masz udziały",
+    "noMyApartments": "Brak apartamentów",
+    "noMyApartmentsDescription": "Nie masz udziałów w żadnym apartamencie",
+    "myShare": "Mój udział",
+    "id": "ID",
+    "clickToView": "Kliknij aby zobaczyć",
+    "createFirst": "Utwórz pierwszy apartament",
     "form": {
       "nameRequired": "Nazwa apartamentu jest wymagana",
       "priceRequired": "Cena za sprzątanie jest wymagana i musi być większa od 0",
@@ -294,5 +305,37 @@
       "updateApartment": "Zaktualizuj apartament",
       "cancel": "Anuluj"
     }
+  },
+  "shares": {
+    "title": "Udziały",
+    "noShares": "Brak udziałów",
+    "totalShares": "Łączne udziały",
+    "loadingShares": "Ładowanie udziałów...",
+    "shareholders": "Udziałowcy",
+    "noShareholders": "Brak udziałowców",
+    "loadingShareholders": "Ładowanie udziałowców...",
+    "apartmentId": "ID Apartamentu",
+    "addShare": "Dodaj udział",
+    "addShareholder": "Dodaj udziałowca",
+    "addNewShare": "Dodaj nowy udział",
+    "selectApartment": "Wybierz apartament",
+    "percentage": "Procent",
+    "add": "Dodaj",
+    "cancel": "Anuluj",
+    "removeShare": "Usuń udział",
+    "loadingApartments": "Ładowanie apartamentów...",
+    "selectUser": "Wybierz użytkownika",
+    "chooseApartment": "Wybierz apartament...",
+    "chooseUser": "Wybierz użytkownika...",
+    "adding": "Dodawanie...",
+    "cancel": "Anuluj",
+    "apartments": "Apartamenty",
+    "noApartments": "Brak apartamentów",
+    "remove": "Usuń",
+    "mustBe100": "Łączne udziały muszą wynosić dokładnie 100%",
+    "saving": "Zapisywanie...",
+    "saveShareholders": "Zapisz udziałowców",
+    "loadingUsers": "Ładowanie użytkowników...",
+    "addShareholders": "Dodaj udziałowców"
   }
 }

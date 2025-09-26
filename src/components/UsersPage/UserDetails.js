@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { useUserDetails } from "../../hooks/useUserDetails";
 import { formatDate } from "../../utils/dateUtils";
 import { formatRoles } from "../../utils/roleUtils";
+import UserShares from "./UserShares";
 
 export default function UserDetails({ userId }) {
   const { t } = useTranslation();
@@ -112,9 +113,9 @@ export default function UserDetails({ userId }) {
         </div>
 
         <div className="p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">
             {t('users.userInfo')}
-          </h3>
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-3">
               <div>
@@ -162,9 +163,9 @@ export default function UserDetails({ userId }) {
           </div>
 
           <div className="mt-8 pt-6 border-t border-gray-200">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">
               {t('users.invoiceInfo')}
-            </h3>
+            </h2>
             
             {user.invoiceInfo ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -216,6 +217,8 @@ export default function UserDetails({ userId }) {
               </div>
             )}
           </div>
+
+          <UserShares user={user} />
 
           <div className="mt-8 pt-6 border-t border-gray-200">
             <div className="flex flex-col sm:flex-row gap-3">

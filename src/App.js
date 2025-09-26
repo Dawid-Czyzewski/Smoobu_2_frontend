@@ -8,6 +8,7 @@ import CreateUserPage from "./pages/CreateUserPage";
 import UserDetailsPage from "./pages/UserDetailsPage";
 import UserEditPage from "./pages/UserEditPage";
 import ApartmentsPage from "./pages/ApartmentsPage";
+import ApartmentsDashboardPage from "./pages/ApartmentsDashboardPage";
 import CreateApartmentPage from "./pages/CreateApartmentPage";
 import ApartmentDetailsPage from "./pages/ApartmentDetailsPage";
 import EditApartmentPage from "./pages/EditApartmentPage";
@@ -28,7 +29,7 @@ function App() {
     const [isMobile, setIsMobile] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     
-    const validPaths = ["/", "/login", "/forgot-password", "/reset-password", "/contact", "/admin/users", "/admin/users/create", "/admin/apartments", "/admin/apartments/create"];
+    const validPaths = ["/", "/login", "/forgot-password", "/reset-password", "/contact", "/admin/users", "/admin/users/create", "/admin/apartments", "/admin/apartments/create", "/apartments"];
     const hideLayout = location.pathname === "/login" || location.pathname === "/forgot-password" || location.pathname === "/reset-password" || 
                       (!validPaths.includes(location.pathname) && !location.pathname.startsWith("/admin/users/") && !location.pathname.startsWith("/admin/apartments/"));
     const layoutReady = !loading && (!isAuthenticated || (isAuthenticated && !loadingUser));
@@ -182,6 +183,15 @@ function App() {
                     element={
                       <AuthGuard type="private">
                         <ApartmentsPage />
+                      </AuthGuard>
+                    }
+                  />
+
+                  <Route
+                    path="/apartments"
+                    element={
+                      <AuthGuard type="private">
+                        <ApartmentsDashboardPage />
                       </AuthGuard>
                     }
                   />

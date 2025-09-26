@@ -84,6 +84,7 @@
       "reports": "Reports"
     },
     "user": {
+      "title": "User",
       "apartments": "My Apartments",
       "reservations": "Reservations",
       "payments": "Payments"
@@ -267,6 +268,16 @@
     "updateSuccess": "Apartment updated successfully!",
     "updateError": "Error updating apartment",
     "authRequired": "Authentication required",
+    "allApartments": "All Apartments",
+    "allApartmentsDescription": "Browse all apartments in the system",
+    "myApartments": "My Apartments",
+    "myApartmentsDescription": "Apartments where you have shares",
+    "noMyApartments": "No Apartments",
+    "noMyApartmentsDescription": "You don't have shares in any apartment",
+    "myShare": "My Share",
+    "id": "ID",
+    "clickToView": "Click to view",
+    "createFirst": "Create First Apartment",
     "form": {
       "nameRequired": "Apartment name is required",
       "priceRequired": "Price for cleaning is required and must be greater than 0",
@@ -294,5 +305,35 @@
       "updateApartment": "Update Apartment",
       "cancel": "Cancel"
     }
+  },
+  "shares": {
+    "title": "Shares",
+    "noShares": "No shares",
+    "totalShares": "Total shares",
+    "loadingShares": "Loading shares...",
+    "shareholders": "Shareholders",
+    "noShareholders": "No shareholders",
+    "loadingShareholders": "Loading shareholders...",
+    "apartmentId": "Apartment ID",
+    "addShare": "Add Share",
+    "addShareholder": "Add Shareholder",
+    "addNewShare": "Add New Share",
+    "removeShare": "Remove Share",
+    "loadingApartments": "Loading apartments...",
+    "selectApartment": "Select Apartment",
+    "selectUser": "Select User",
+    "chooseApartment": "Choose apartment...",
+    "chooseUser": "Choose user...",
+    "percentage": "Percentage (%)",
+    "adding": "Adding...",
+    "cancel": "Cancel",
+    "apartments": "Apartments",
+    "noApartments": "No apartments",
+    "remove": "Remove",
+    "mustBe100": "Total shares must equal exactly 100%",
+    "saving": "Saving...",
+    "saveShareholders": "Save Shareholders",
+    "loadingUsers": "Loading users...",
+    "addShareholders": "Add Shareholders"
   }
 }

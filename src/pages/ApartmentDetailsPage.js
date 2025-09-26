@@ -8,6 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { formatDate } from "../utils/dateUtils";
 import { formatPrice, formatVat } from "../utils/priceUtils";
 import { BASE_URL } from "../config";
+import ApartmentShareholders from "../components/ApartmentsPage/ApartmentShareholders";
 
 export default function ApartmentDetailsPage() {
   const { t } = useTranslation();
@@ -140,7 +141,7 @@ export default function ApartmentDetailsPage() {
 
         <div>
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-6 pb-4 border-b border-gray-200">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 pb-4 border-b border-gray-200">
               {t('apartments.basicInfo')}
             </h2>
             <div className="space-y-4">
@@ -209,7 +210,9 @@ export default function ApartmentDetailsPage() {
         </div>
       </div>
 
-      <div className="mt-12 pt-6 border-t border-gray-200">
+      <ApartmentShareholders apartment={apartment} />
+
+      <div className="mt-8 pt-6 border-t border-gray-200">
         <div className="flex justify-start">
           <button
             onClick={handleBack}

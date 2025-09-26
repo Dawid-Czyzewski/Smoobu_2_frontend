@@ -100,6 +100,7 @@ export default function UserEditPage() {
         return;
       }
 
+
       if (formData.password) {
         toast.success(t('users.passwordChanged'));
       } else {
